@@ -3,7 +3,9 @@
 " Maintainer:   mingchaoyan <mingchaoyan@gmail.com>
 "
 
-if exists("b:current_syntax")
+if v:version < 600
+  syntax clear
+elseif exists('b:current_syntax')
   finish
 endif
 
@@ -111,21 +113,34 @@ syntax match shaderlabComment '\v\/\/.*$'
 
 syn region      shaderlabPreProc        start="^\s*\(%:\|#\)\s*\(pragma\>\|include\>\)" skip="\\$" end="$" keepend contains=ALLBUT
 
-highlight link shaderlabKeyword    Keyword
-highlight link shaderlabProperty   StorageClass
-highlight link shaderlabType       Type
-highlight link shaderlabSemantics  Typedef
+" Define the default highlighting.
+" For version 5.7 and earlier: only when not done already
+" For version 5.8 and later: only when an item doesn't have highlighting yet
+if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
+  if v:version < 508
+    let did_shaderlab_syntax_inits = 1
+    command -nargs=+ HiLink hi link <args>
+  else
+    command -nargs=+ HiLink hi def link <args>
+  endif
 
-highlight link shaderlabString     String
-highlight link shaderlabNumber     Number
-highlight link shaderlabFloat      Float
-highlight link shaderlabOperator   Operator
+  HiLink shaderlabKeyword Keyword
+  HiLink shaderlabProperty StorageClass
+  HiLink shaderlabType Type
+  HiLink shaderlabSemantics Typedef
 
-highlight link shaderlabFunction   Function
-highlight link shaderlabStatement  Statement
-highlight link shaderlabCGProgram  PreCondit
-highlight link shaderlabComment    Comment
-highlight link shaderlabPreProc    PreCondit
+  HiLink shaderlabString String
+  HiLink shaderlabNumber Number
+  HiLink shaderlabFloat Float
+  HiLink shaderlabOperator Operator
 
+  HiLink shaderlabFunction Function
+  HiLink shaderlabStatement Statement
+  HiLink shaderlabCGProgram PreCondit
+  HiLink shaderlabComment Comment
+  HiLink shaderlabPreProc PreCondit
 
-let b:current_syntax = "shaderlab"
+  delcommand HiLink
+endif
+
+let b:current_syntax = 'shaderlab'
