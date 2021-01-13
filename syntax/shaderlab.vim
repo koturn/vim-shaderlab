@@ -38,48 +38,241 @@ syntax match shaderlabKeywordValue '\%(Less\|Greater\|LEqual\|GEqual\|Equal\|Not
 
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
-syntax keyword shaderlabStorageClass static const
+syntax keyword shaderlabStorageClass static const inline
 
 syntax match shaderlabType '\%(fixed\|half\|float\)\%([1-4]x[1-4]\|[2-4]\)\?'
-syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f_customrendertexture
+syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f v2f_customrendertexture
 
 syntax keyword shaderlabSemantics POSITION NORMAL TANGENG COLOR SV_POSITION COLOR1 COLOR2 SV_Target
 syntax match shaderlabSemantics 'TEXCOORD\d'
 
-syntax keyword shaderlabFunction length
-      \ cross
-      \ pow
-      \ tex2D
+syntax keyword shaderlabFunction
       \ UnpackNormal
-      \ saturate
-      \ dot
-      \ normalize
-      \ clip
-      \ frac
-      \ mul
       \ TRANSFORM_TEX
-      \ SetTexture
       \ combine
+      \ SetTexture
       \ UnityPixelSnap
+
+syntax keyword shaderlabUnityCGFunction
+      \ UnityObjectToClipPos
+      \ UnityObjectToViewPos
+      \ WorldSpaceViewDir
+      \ ObjSpaceViewDir
+      \ ParallaxOffset
+      \ Luminance
+      \ DecodeLightmap
+      \ EncodeFloatRGBA
+      \ DecodeFloatRGBA
+      \ EncodeFloatRG
+      \ DecodeFloatRG
+      \ EncodeViewNormalStereo
+      \ DecodeViewNormalStereo
+      \ WorldSpaceLightDir
+      \ ObjSpaceLightDir
+      \ Shade4PointLights
+      \ ComputeScreenPos
+      \ ComputeGrabScreenPos
+      \ ShadeVertexLights
+
+syntax keyword shaderlabFunction1
       \ abs
-      \ min
-      \ max
-      \ pow
-      \ lerp
-      \ fmod
-      \ step
-      \ clamp
-      \ sin
-      \ cos
-      \ floor
+      \ acos
+      \ all
+      \ any
+      \ asin
+      \ atan
+      \ atan2
       \ ceil
+      \ clamp
+      \ clip
+      \ cos
+      \ cosh
+      \ cross
+      \ D3DCOLORtoUBYTE4
+      \ degrees
+      \ determinant
+      \ distance
+      \ dot
+      \ exp
+      \ exp2
+      \ faceforward
+      \ floor
+      \ fmod
+      \ frac
+      \ isfinite
+      \ isinf
+      \ isnan
+      \ ldexp
+      \ length
+      \ lerp
+      \ lit
+      \ log
+      \ log10
+      \ log2
+      \ max
+      \ min
+      \ modf
+      \ mul
+      \ noise
+      \ normalize
+      \ pow
+      \ radians
+      \ reflect
+      \ refract
+      \ round
+      \ rsqrt
+      \ saturate
+      \ sign
+      \ sin
+      \ sincos
+      \ sinh
       \ smoothstep
+      \ sqrt
+      \ step
+      \ tan
+      \ tanh
+      \ tex1D
+      \ tex2D
+      \ tex3D
+      \ texCUBE
+      \ transpose
+      \ trunc
+
+syntax keyword shaderlabFunction2
+      \ ddx
+      \ ddy
+      \ frexp
+      \ fwidth
+      \ tex1Dbias
+      \ tex1Dgrad
+      \ tex1Dproj
+      \ tex2Dbias
+      \ tex2Dgrad
+      \ tex2Dproj
+      \ tex3Dbias
+      \ tex3Dgrad
+      \ tex3Dproj
+      \ texCUBEbias
+      \ texCUBEgrad
+      \ texCUBEproj
+
+syntax keyword shaderlabFunction3
+      \ tex1Dlod
+      \ tex2Dlod
+      \ tex3Dlod
+      \ texCUBElod
+
+syntax keyword shaderlabFunction4
+      \ abort
+      \ asfloat
+      \ asint
+      \ asuint
+      \ errorf
+      \ GetRenderTargetSampleCount
+      \ GetRenderTargetSamplePosition
+      \ printf
+
+syntax keyword shaderlabFunction5
+      \ AllMemoryBarrier
+      \ AllMemoryBarrierWithGroupSync
+      \ asdouble
+      \ CheckAccessFullyMapped
+      \ countbits
+      \ ddx_coarse
+      \ ddx_fine
+      \ ddy_coarse
+      \ ddy_fine
+      \ DeviceMemoryBarrier
+      \ DeviceMemoryBarrierWithGroupSync
+      \ dst
+      \ EvaluateAttributeAtCentroid
+      \ EvaluateAttributeAtSample
+      \ EvaluateAttributeSnapped
+      \ f16tof32
+      \ f32tof16
+      \ firstbithigh
+      \ firstbitlow
+      \ fma
+      \ GroupMemoryBarrier
+      \ GroupMemoryBarrierWithGroupSync
+      \ InterlockedAdd
+      \ InterlockedAnd
+      \ InterlockedCompareExchange
+      \ InterlockedCompareStore
+      \ InterlockedExchange
+      \ InterlockedMax
+      \ InterlockedMin
+      \ InterlockedOr
+      \ InterlockedXor
+      \ mad
+      \ msad4
+      \ Process2DQuadTessFactorsAvg
+      \ Process2DQuadTessFactorsMax
+      \ Process2DQuadTessFactorsMin
+      \ ProcessIsolineTessFactors
+      \ ProcessQuadTessFactorsAvg
+      \ ProcessQuadTessFactorsMax
+      \ ProcessQuadTessFactorsMin
+      \ ProcessTriTessFactorsAvg
+      \ ProcessTriTessFactorsMax
+      \ ProcessTriTessFactorsMin
+      \ rcp
+      \ reversebits
+
+syntax keyword shaderlabMacro
+      \ SHADER_API_D3D11
+      \ SHADER_API_GLCORE
+      \ SHADER_API_GLES
+      \ SHADER_API_GLES3
+      \ SHADER_API_METAL
+      \ SHADER_API_VULKAN
+      \ SHADER_API_D3D11_9X
+      \ SHADER_API_PS4
+      \ SHADER_API_XBOXONE
+      \ UNITY_BRANCH
+      \ UNITY_FLATTEN
+      \ UNITY_NO_SCREENSPACE_SHADOWS
+      \ UNITY_NO_LINEAR_COLORSPACE
+      \ UNITY_NO_RGBM
+      \ UNITY_NO_DXT5nm
+      \ UNITY_FRAMEBUFFER_FETCH_AVAILABLE
+      \ UNITY_USE_RGBA_FOR_POINT_SHADOWS
+      \ UNITY_ATTEN_CHANNEL
+      \ UNITY_HALF_TEXEL_OFFSET
+      \ UNITY_UV_STARTS_AT_TOP
+      \ UNITY_MIGHT_NOT_HAVE_DEPTH_Texture
+      \ UNITY_PROJ_COORD
+      \ UNITY_NEAR_CLIP_VALUE
+      \ UNITY_VPOS_TYPE
+      \ UNITY_CAN_COMPILE_TESSELLATION
+      \ UNITY_INITIALIZE_OUTPUT
+      \ UNITY_COMPILER_HLSL
+      \ UNITY_COMPILER_HLSL2GLSL
+      \ UNITY_COMPILER_CG
+      \ UNITY_DECLARE_SHADOWMAP
+      \ UNITY_SAMPLE_SHADOW
+      \ UNITY_SAMPLE_SHADOW_PROJ
+      \ UNITY_DECLARE_TEX2D
+      \ UNITY_DECLARE_TEX2D_NOSAMPLER
+      \ UNITY_DECLARE_TEX2DARRAY
+      \ UNITY_SAMPLE_TEX2D
+      \ UNITY_SAMPLE_TEX2D_SAMPLER
+      \ UNITY_SAMPLE_TEX2DARRAY
+      \ UNITY_SAMPLE_TEX2DARRAY_LOD
+      \ UNITY_PASS_FORWARDBASE
+      \ UNITY_PASS_FORWARDADD
+      \ UNITY_PASS_DEFERRED
+      \ UNITY_PASS_SHADOWCASTER
+      \ UNITY_PASS_PREPASSBASE
+      \ UNITY_PASS_PREPASSFINAL
+      \ UNITY_SHADER_NO_UPGRADE
 
 syntax keyword shaderlabStatement if else for return break continue
 
 syntax keyword shaderlabCGProgram CGPROGRAM ENDCG
 
-syntax keyword shaderlabVariable _WorldSpaceCameraPos
+syntax keyword shaderlabVariable
+      \ _WorldSpaceCameraPos
       \ _ProjectionParams
       \ _ScreenParams
       \ _ZBufferParams
@@ -93,6 +286,7 @@ syntax keyword shaderlabVariable _WorldSpaceCameraPos
       \ unity_DeltaTime
       \ _LightColor0
       \ _WorldSpaceLightPos0
+      \ _LightMatrix0
       \ unity_WorldToLight
       \ unity_4LightPosX0
       \ unity_4LightPosY0
@@ -101,15 +295,11 @@ syntax keyword shaderlabVariable _WorldSpaceCameraPos
       \ unity_LightColor
       \ unity_WorldToShadow
       \ _LightColor
-      \ unity_WorldToLight
-      \ unity_WorldToShadow
-      \ unity_LightColor
       \ unity_LightPosition
       \ unity_LightAtten
       \ unity_SpotDirection
       \ unity_Lightmap
       \ unity_LightmapST
-      \ unity_AmbientSky
       \ unity_AmbientSky
       \ unity_AmbientGround
       \ UNITY_LIGHTMODEL_AMBIENT
@@ -118,7 +308,8 @@ syntax keyword shaderlabVariable _WorldSpaceCameraPos
       \ unity_LODFade
       \ _TextureSampleAdd
 
-syntax keyword shaderlabCRTVariable _CustomRenderTextureWidth
+syntax keyword shaderlabCRTVariable
+      \ _CustomRenderTextureWidth
       \ _CustomRenderTextureHeight
       \ _CustomRenderTextureDepth
       \ _CustomRenderTextureCubeFace
@@ -130,7 +321,11 @@ syntax keyword shaderlabCRTVariable _CustomRenderTextureWidth
 syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 
 syntax match shaderlabNumber '\<\d\+\>'
-syntax match shaderlabFloat '\<\d\+\.\d\+\>'
+" syntax match shaderlabFloat '\<\d\+\.\d\+\>'
+
+syntax match	shaderlabFloat '\d\+\.\d*\%(e[-+]\=\d\+\)'
+syntax match	shaderlabFloat '\.\d\+\%(e[-+]\=\d\+\)'
+syntax match	shaderlabFloat '\d\+e[-+]\=\d\+'
 
 syntax match shaderlabOperator "\v\="
 syntax match shaderlabOperator "\v\*"
@@ -145,7 +340,7 @@ syntax match shaderlabOperator "\v-\="
 
 syntax match shaderlabComment '\v\/\/.*$'
 
-syn region shaderlabPreProc start="^\s*\(%:\|#\)\s*\(pragma\>\|include\|define\>\)" skip="\\$" end="$" keepend contains=ALLBUT
+syntax region shaderlabPreProc start="^\s*\(%:\|#\)\s*\(pragma\>\|include\|define\>\)" skip="\\$" end="$" keepend contains=ALLBUT
 
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
@@ -171,6 +366,12 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabOperator Operator
 
   HiLink shaderlabFunction Function
+  HiLink shaderlabUnityCGFunction Function
+  HiLink shaderlabFunction1 Function
+  HiLink shaderlabFunction2 Function
+  HiLink shaderlabFunction3 Function
+  HiLink shaderlabFunction4 Function
+  HiLink shaderlabFunction5 Function
   HiLink shaderlabStatement Statement
   HiLink shaderlabCGProgram PreCondit
   HiLink shaderlabComment Comment
@@ -178,6 +379,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabVariable Identifier
   HiLink shaderlabCRTVariable Identifier
 
+  HiLink shaderlabMacro Constant
   HiLink shaderlabKeywordValue Constant
 
   delcommand HiLink
