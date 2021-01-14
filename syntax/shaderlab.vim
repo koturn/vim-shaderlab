@@ -338,6 +338,8 @@ syntax match shaderlabOperator "\v/\="
 syntax match shaderlabOperator "\v\+\="
 syntax match shaderlabOperator "\v-\="
 
+syntax match shaderlabSwizzleOperator '\.\s*\<\%([xyzw]\{1,4\}\|[rgba]\{1,4\}\|[stpq]\{1,4\}\)\>'
+
 syntax match shaderlabComment '\v\/\/.*$'
 
 syntax region shaderlabPreProc start="^\s*\(%:\|#\)\s*\(pragma\>\|include\|define\>\)" skip="\\$" end="$" keepend contains=ALLBUT
@@ -364,6 +366,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabNumber Number
   HiLink shaderlabFloat Float
   HiLink shaderlabOperator Operator
+  HiLink shaderlabSwizzleOperator Identifier
 
   HiLink shaderlabFunction Function
   HiLink shaderlabUnityCGFunction Function
