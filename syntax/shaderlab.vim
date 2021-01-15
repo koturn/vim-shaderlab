@@ -266,6 +266,13 @@ syntax keyword shaderlabMacro
       \ UNITY_PASS_PREPASSBASE
       \ UNITY_PASS_PREPASSFINAL
       \ UNITY_SHADER_NO_UPGRADE
+      \ UNITY_INSTANCING_BUFFER_START
+      \ UNITY_DEFINE_INSTANCED_PROP
+      \ UNITY_INSTANCING_BUFFER_END
+      \ UNITY_SETUP_INSTANCE_ID
+      \ UNITY_TRANSFER_INSTANCE_ID
+      \ UNITY_ACCESS_INSTANCED_PROP
+      \ UNITY_VERTEX_INPUT_INSTANCE_ID
 
 syntax keyword shaderlabStatement if else for return break continue
 
