@@ -276,7 +276,7 @@ syntax keyword shaderlabMacro
 
 syntax keyword shaderlabStatement if else for return break continue
 
-syntax keyword shaderlabCGProgram CGPROGRAM ENDCG
+syntax keyword shaderlabCGProgram CGPROGRAM CGINCLUDE ENDCG
 
 syntax keyword shaderlabVariable
       \ _WorldSpaceCameraPos
