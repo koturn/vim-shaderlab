@@ -34,17 +34,17 @@ syntax keyword shaderlabKeyword Shader
       \ UsePass
 
 syntax match shaderlabKeywordValue /\<O\%(n\|ff\)\>/
-syntax match shaderlabKeywordValue '\%(Less\|Greater\|LEqual\|GEqual\|Equal\|NotEqual\|Always\)'
+syntax match shaderlabKeywordValue '\<\%(Less\|Greater\|LEqual\|GEqual\|Equal\|NotEqual\|Always\)\>'
 
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
-syntax keyword shaderlabStorageClass static const inline
+syntax keyword shaderlabStorageClass static const inline uniform
 
-syntax match shaderlabType '\%(fixed\|half\|float\)\%([1-4]x[1-4]\|[2-4]\)\?'
+syntax match shaderlabType '\<\%(fixed\|half\|float\)\%([1-4]x[1-4]\|[2-4]\)\?\>'
 syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f v2f_customrendertexture
 
 syntax keyword shaderlabSemantics POSITION NORMAL TANGENG COLOR SV_POSITION COLOR1 COLOR2 SV_Target
-syntax match shaderlabSemantics 'TEXCOORD\d'
+syntax match shaderlabSemantics '\<TEXCOORD\d\>'
 
 syntax keyword shaderlabFunction
       \ UnpackNormal
