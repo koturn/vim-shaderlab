@@ -330,9 +330,9 @@ syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 syntax match shaderlabNumber '\<\d\+\>'
 " syntax match shaderlabFloat '\<\d\+\.\d\+\>'
 
-syntax match	shaderlabFloat '\d\+\.\d*\%(e[-+]\=\d\+\)'
-syntax match	shaderlabFloat '\.\d\+\%(e[-+]\=\d\+\)'
-syntax match	shaderlabFloat '\d\+e[-+]\=\d\+'
+syntax match shaderlabFloat '\d\+\.\d*\%(e[-+]\=\d\+\)'
+syntax match shaderlabFloat '\.\d\+\%(e[-+]\=\d\+\)'
+syntax match shaderlabFloat '\d\+e[-+]\=\d\+'
 
 syntax match shaderlabOperator "\v\="
 syntax match shaderlabOperator "\v\*"
@@ -347,9 +347,18 @@ syntax match shaderlabOperator "\v-\="
 
 syntax match shaderlabSwizzleOperator '\.\s*\<\%([xyzw]\{1,4\}\|[rgba]\{1,4\}\|[stpq]\{1,4\}\)\>'
 
-syntax match shaderlabComment '\v\/\/.*$'
+" syntax match shaderlabCommentL '\v\/\/.*$'
+syntax region shaderlabCommentL start="//" skip="\\$" end="$" keepend contains=@Spell
+if exists("c_no_comment_fold")
+  syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell extend
+else
+  syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell fold extend
+endif
+syntax match shaderlabCommentError display "\*/"
+syntax match shaderlabCommentStartError display "/\*"me=e-1 contained
 
 syntax region shaderlabPreProc start="^\s*\(%:\|#\)\s*\(pragma\>\|include\|define\>\)" skip="\\$" end="$" keepend contains=ALLBUT
+
 
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
@@ -384,13 +393,18 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabFunction5 Function
   HiLink shaderlabStatement Statement
   HiLink shaderlabCGProgram PreCondit
-  HiLink shaderlabComment Comment
   HiLink shaderlabPreProc PreCondit
   HiLink shaderlabVariable Identifier
   HiLink shaderlabCRTVariable Identifier
 
   HiLink shaderlabMacro Constant
   HiLink shaderlabKeywordValue Constant
+
+  HiLink shaderlabComment Comment
+  HiLink shaderlabCommentL shaderlabComment
+  HiLink shaderlabCommentStart shaderlabComment
+  HiLink shaderlabCommentError Error
+  HiLink shaderlabCommentStartError Error
 
   delcommand HiLink
 endif
