@@ -41,7 +41,7 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 syntax keyword shaderlabStorageClass static const inline uniform
 
 syntax match shaderlabType '\<\%(fixed\|half\|float\)\%([1-4]x[1-4]\|[2-4]\)\?\>'
-syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f v2f_customrendertexture
+syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f v2f_customrendertexture v2f_init_customrendertexture
 
 syntax keyword shaderlabSemantics POSITION NORMAL TANGENG COLOR SV_POSITION COLOR1 COLOR2 SV_Target
 syntax match shaderlabSemantics '\<TEXCOORD\d\>'
@@ -56,6 +56,7 @@ syntax keyword shaderlabFunction
 syntax keyword shaderlabUnityCGFunction
       \ UnityObjectToClipPos
       \ UnityObjectToViewPos
+      \ UnityGet2DClipping
       \ WorldSpaceViewDir
       \ ObjSpaceViewDir
       \ ParallaxOffset
@@ -276,7 +277,7 @@ syntax keyword shaderlabMacro
 
 syntax keyword shaderlabStatement if else for return break continue
 
-syntax keyword shaderlabCGProgram CGPROGRAM CGINCLUDE ENDCG
+syntax keyword shaderlabLangDirective CGPROGRAM CGINCLUDE ENDCG HLSLPROGRAM HLSLINCLUDE ENDHLSL
 
 syntax keyword shaderlabVariable
       \ _WorldSpaceCameraPos
@@ -357,7 +358,7 @@ endif
 syntax match shaderlabCommentError display "\*/"
 syntax match shaderlabCommentStartError display "/\*"me=e-1 contained
 
-syntax region shaderlabPreProc start="^\s*\(%:\|#\)\s*\(pragma\>\|include\|define\>\)" skip="\\$" end="$" keepend contains=ALLBUT
+syntax region shaderlabPreProc start="^\s*\zs\%(%:\|#\)\s*\%(pragma\|include\|define\|undef\|ifn\?def\|if\|elif\|else\|endif\|line\|error\)\>" skip="\\$" end="$" keepend contains=ALLBUT,shaderlabStatement
 
 
 " Define the default highlighting.
@@ -392,7 +393,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabFunction4 Function
   HiLink shaderlabFunction5 Function
   HiLink shaderlabStatement Statement
-  HiLink shaderlabCGProgram PreCondit
+  HiLink shaderlabLangDirective PreCondit
   HiLink shaderlabPreProc PreCondit
   HiLink shaderlabVariable Identifier
   HiLink shaderlabCRTVariable Identifier
