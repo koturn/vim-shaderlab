@@ -42,6 +42,24 @@ syntax keyword shaderlabStorageClass static const inline uniform
 
 syntax match shaderlabType '\<\%(fixed\|half\|float\)\%([1-4]x[1-4]\|[2-4]\)\?\>'
 syntax keyword shaderlabType void int bool SurfaceOutput samplerCUBE sampler2D sampler3D 2D struct v2f v2f_customrendertexture v2f_init_customrendertexture
+syntax keyword shaderlabAttrType
+      \ Enum
+      \ Gamma
+      \ HDR
+      \ Header
+      \ HideInInspector
+      \ IntRange
+      \ KeywordEnum
+      \ KeywordEnum
+      \ MainColor
+      \ MainTexture
+      \ MaterialToggle
+      \ NoScaleOffset
+      \ Normal
+      \ PerRendererData
+      \ PowerSlider
+      \ Space
+      \ Toggle
 
 syntax keyword shaderlabSemantics POSITION NORMAL TANGENG COLOR SV_POSITION COLOR1 COLOR2 SV_Target
 syntax match shaderlabSemantics '\<TEXCOORD\d\>'
@@ -377,6 +395,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
 
   HiLink shaderlabStorageClass StorageClass
   HiLink shaderlabType Type
+  HiLink shaderlabAttrType Type
   HiLink shaderlabSemantics Typedef
 
   HiLink shaderlabString String
