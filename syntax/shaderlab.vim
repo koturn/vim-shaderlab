@@ -9,7 +9,8 @@ elseif exists('b:current_syntax')
   finish
 endif
 
-syntax keyword shaderlabKeyword Shader
+syntax keyword shaderlabKeyword
+      \ Shader
       \ Category
       \ Properties
       \ SubShader
@@ -20,21 +21,26 @@ syntax keyword shaderlabKeyword Shader
       \ Fallback
       \ Material
       \ Lighting
-      \ Cull
-      \ ZTest
-      \ ZWrite
       \ Fog
       \ AlphaTest
       \ BindChannels
-      \ Blend
       \ ColorMask
       \ Offset
       \ SeparateSpecular
       \ ColorMaterial
       \ UsePass
 
-syntax match shaderlabKeywordValue /\<O\%(n\|ff\)\>/
-syntax match shaderlabKeywordValue '\<\%(Less\|Greater\|LEqual\|GEqual\|Equal\|NotEqual\|Always\)\>'
+syntax keyword shaderlabKeywordCull Cull nextgroup=shaderlabKeywordValueCull skipwhite
+syntax match shaderlabKeywordValueCull '\<\%(Back\|Front\|Off\)' contained
+
+syntax keyword shaderlabKeywordZWrite ZWrite nextgroup=shaderlabKeywordValueZWrite skipwhite
+syntax match shaderlabKeywordValueZWrite '\<O\%(n\|ff\)\>' contained
+
+syntax keyword shaderlabKeywordZTest ZTest nextgroup=shaderlabKeywordValueZTest skipwhite
+syntax match shaderlabKeywordValueZTest '\<\%(Less\|Greater\|LEqual\|GEqual\|Equal\|NotEqual\|Always\)' contained
+
+syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordValueBlend skipwhite
+syntax match shaderlabKeywordValueBlend '\<\%(One\|Zero\|SrcColor\|SrcAlpha\|DstColor\|DstAlpha\|OneMinusSrcColor\|OneMinusSrcAlpha\|OneMinusDstColor\|OneMinusDstAlpha\)' contained nextgroup=shaderlabKeywordValueBlend skipwhite
 
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
@@ -391,6 +397,11 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   endif
 
   HiLink shaderlabKeyword Keyword
+  HiLink shaderlabKeywordCull shaderlabKeyword
+  HiLink shaderlabKeywordZWrite shaderlabKeyword
+  HiLink shaderlabKeywordZTest shaderlabKeyword
+  HiLink shaderlabKeywordBlend shaderlabKeyword
+
   HiLink shaderlabProperty StorageClass
 
   HiLink shaderlabStorageClass StorageClass
@@ -418,7 +429,12 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabCRTVariable Identifier
 
   HiLink shaderlabMacro Constant
+
   HiLink shaderlabKeywordValue Constant
+  HiLink shaderlabKeywordValueCull shaderlabKeywordValue
+  HiLink shaderlabKeywordValueZWrite shaderlabKeywordValue
+  HiLink shaderlabKeywordValueZTest shaderlabKeywordValue
+  HiLink shaderlabKeywordValueBlend shaderlabKeywordValue
 
   HiLink shaderlabComment Comment
   HiLink shaderlabCommentL shaderlabComment
