@@ -19,28 +19,65 @@ syntax keyword shaderlabKeyword
       \ Tags
       \ LOD
       \ Fallback
-      \ Material
-      \ Lighting
       \ Fog
-      \ AlphaTest
       \ BindChannels
       \ ColorMask
       \ Offset
-      \ SeparateSpecular
       \ ColorMaterial
       \ UsePass
 
-syntax keyword shaderlabKeywordCull Cull nextgroup=shaderlabKeywordValueCull skipwhite
-syntax match shaderlabKeywordValueCull '\<\%(Back\|Front\|Off\)' contained
+syntax keyword shaderlabKeywordAlphaTest AlphaTest nextgroup=shaderlabKeywordValueAlphaTest skipwhite skipempty
+syntax keyword shaderlabKeywordValueAlphaTest
+      \ Off
+      \ Greater
+      \ GEqual
+      \ Less
+      \ LEqual
+      \ Equal
+      \ NotEqual
+      \ Always
+      \ Never
+      \ contained
 
-syntax keyword shaderlabKeywordZWrite ZWrite nextgroup=shaderlabKeywordValueZWrite skipwhite
-syntax match shaderlabKeywordValueZWrite '\<O\%(n\|ff\)\>' contained
+syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
+syntax keyword shaderlabKeywordValueBlend
+      \ One
+      \ Zero
+      \ SrcColor
+      \ SrcAlpha
+      \ DstColor
+      \ DstAlpha
+      \ OneMinusSrcColor
+      \ OneMinusSrcAlpha
+      \ OneMinusDstColor
+      \ OneMinusDstAlpha
+      \ contained nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
 
-syntax keyword shaderlabKeywordZTest ZTest nextgroup=shaderlabKeywordValueZTest skipwhite
-syntax match shaderlabKeywordValueZTest '\<\%(Less\|Greater\|LEqual\|GEqual\|Equal\|NotEqual\|Always\)' contained
+syntax keyword shaderlabKeywordCull Cull nextgroup=shaderlabKeywordValueCull skipwhite skipempty
+syntax keyword shaderlabKeywordValueCull Back Front Off contained
 
-syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordValueBlend skipwhite
-syntax match shaderlabKeywordValueBlend '\<\%(One\|Zero\|SrcColor\|SrcAlpha\|DstColor\|DstAlpha\|OneMinusSrcColor\|OneMinusSrcAlpha\|OneMinusDstColor\|OneMinusDstAlpha\)' contained nextgroup=shaderlabKeywordValueBlend skipwhite
+syntax keyword shaderlabKeywordFog Fog nextgroup=shaderlabKeywordFogBlock skipwhite skipempty
+syntax region shaderlabKeywordFogBlock start='{' skip='$' end='}' contained contains=shaderlabKeywordFogSub,shaderlabKeywordFogMode
+syntax keyword shaderlabKeywordFogSub Color Density Range contained
+syntax keyword shaderlabKeywordFogMode Mode contained nextgroup=shaderlabKeywordValueFogMode skipwhite skipempty
+syntax keyword shaderlabKeywordValueFogMode Off Global Linear Exp Exp2 contained
+
+syntax keyword shaderlabKeywordLighting Lighting nextgroup=shaderlabKeywordValueLighting skipwhite skipempty
+syntax keyword shaderlabKeywordValueLighting On Off contained
+
+syntax keyword shaderlabKeywordMaterial Material nextgroup=shaderlabKeywordMaterialBlock skipwhite skipempty
+syntax region shaderlabKeywordMaterialBlock start='{' skip='$' end='}' contained contains=shaderlabKeywordMaterialSub
+syntax keyword shaderlabKeywordMaterialSub Diffuse Ambient Specular Shininess Emission contained
+
+syntax keyword shaderlabKeywordSeparateSpecular SeparateSpecular nextgroup=shaderlabKeywordValueSeparateSpecular skipwhite skipempty
+syntax keyword shaderlabKeywordValueSeparateSpecular On Off contained
+
+syntax keyword shaderlabKeywordZTest ZTest nextgroup=shaderlabKeywordValueZTest skipwhite skipempty
+syntax keyword shaderlabKeywordValueZTest Less Greater LEqual GEqual NotEqual Always contained
+
+syntax keyword shaderlabKeywordZWrite ZWrite nextgroup=shaderlabKeywordValueZWrite skipwhite skipempty
+syntax keyword shaderlabKeywordValueZWrite On Off contained
+
 
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
@@ -55,7 +92,6 @@ syntax keyword shaderlabAttrType
       \ Header
       \ HideInInspector
       \ IntRange
-      \ KeywordEnum
       \ KeywordEnum
       \ MainColor
       \ MainTexture
@@ -397,10 +433,18 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   endif
 
   HiLink shaderlabKeyword Keyword
-  HiLink shaderlabKeywordCull shaderlabKeyword
-  HiLink shaderlabKeywordZWrite shaderlabKeyword
-  HiLink shaderlabKeywordZTest shaderlabKeyword
+  HiLink shaderlabKeywordAlphaTest shaderlabKeyword
   HiLink shaderlabKeywordBlend shaderlabKeyword
+  HiLink shaderlabKeywordCull shaderlabKeyword
+  HiLink shaderlabKeywordFog shaderlabKeyword
+  HiLink shaderlabKeywordFogSub shaderlabKeyword
+  HiLink shaderlabKeywordFogMode shaderlabKeyword
+  HiLink shaderlabKeywordLighting shaderlabKeyword
+  HiLink shaderlabKeywordMaterial shaderlabKeyword
+  HiLink shaderlabKeywordMaterialSub shaderlabKeyword
+  HiLink shaderlabKeywordSeparateSpecular shaderlabKeyword
+  HiLink shaderlabKeywordZTest shaderlabKeyword
+  HiLink shaderlabKeywordZWrite shaderlabKeyword
 
   HiLink shaderlabProperty StorageClass
 
@@ -431,10 +475,14 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabMacro Constant
 
   HiLink shaderlabKeywordValue Constant
-  HiLink shaderlabKeywordValueCull shaderlabKeywordValue
-  HiLink shaderlabKeywordValueZWrite shaderlabKeywordValue
-  HiLink shaderlabKeywordValueZTest shaderlabKeywordValue
+  HiLink shaderlabKeywordValueAlphaTest shaderlabKeywordValue
   HiLink shaderlabKeywordValueBlend shaderlabKeywordValue
+  HiLink shaderlabKeywordValueCull shaderlabKeywordValue
+  HiLink shaderlabKeywordValueFogMode shaderlabKeywordValue
+  HiLink shaderlabKeywordValueLighting shaderlabKeywordValue
+  HiLink shaderlabKeywordValueSeparateSpecular shaderlabKeywordValue
+  HiLink shaderlabKeywordValueZTest shaderlabKeywordValue
+  HiLink shaderlabKeywordValueZWrite shaderlabKeywordValue
 
   HiLink shaderlabComment Comment
   HiLink shaderlabCommentL shaderlabComment
