@@ -391,9 +391,9 @@ syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 syntax match shaderlabNumber '\<\d\+\>'
 " syntax match shaderlabFloat '\<\d\+\.\d\+\>'
 
-syntax match shaderlabFloat '\d\+\.\d*\%(e[-+]\=\d\+\)'
-syntax match shaderlabFloat '\.\d\+\%(e[-+]\=\d\+\)'
-syntax match shaderlabFloat '\d\+e[-+]\=\d\+'
+syntax match shaderlabFloat '\d\+\.\d*\%(e[-+]\?\d\+\)\?f\?'
+syntax match shaderlabFloat '\.\d\+\%(e[-+]\?\d\+\)\?f\?'
+syntax match shaderlabFloat '\d\+e[-+]\?\d\+f\?'
 
 syntax match shaderlabOperator "\v\="
 syntax match shaderlabOperator "\v\*"
