@@ -180,6 +180,7 @@ syntax keyword shaderlabFunction1
       \ tanh
       \ tex1D
       \ tex2D
+      \ tex2DArray
       \ tex3D
       \ texCUBE
       \ transpose
@@ -196,6 +197,9 @@ syntax keyword shaderlabFunction2
       \ tex2Dbias
       \ tex2Dgrad
       \ tex2Dproj
+      \ tex2DArraybias
+      \ tex2DArraygrad
+      \ tex2DArrayproj
       \ tex3Dbias
       \ tex3Dgrad
       \ tex3Dproj
@@ -206,6 +210,7 @@ syntax keyword shaderlabFunction2
 syntax keyword shaderlabFunction3
       \ tex1Dlod
       \ tex2Dlod
+      \ tex2DArraylod
       \ tex3Dlod
       \ texCUBElod
 
@@ -290,7 +295,6 @@ syntax keyword shaderlabMacro
       \ UNITY_MIGHT_NOT_HAVE_DEPTH_Texture
       \ UNITY_PROJ_COORD
       \ UNITY_NEAR_CLIP_VALUE
-      \ UNITY_VPOS_TYPE
       \ UNITY_CAN_COMPILE_TESSELLATION
       \ UNITY_INITIALIZE_OUTPUT
       \ UNITY_COMPILER_HLSL
@@ -366,7 +370,7 @@ syntax keyword shaderlabMacroFunction
       \ texRECTbias
       \ texRECTproj
 
-syntax keyword shaderlabStatement if else for return break continue
+syntax keyword shaderlabStatement if else for return discard break continue
 
 syntax keyword shaderlabLangDirective CGPROGRAM CGINCLUDE ENDCG HLSLPROGRAM HLSLINCLUDE ENDHLSL
 
@@ -539,6 +543,11 @@ syntax keyword shaderlabUnityCGMacro
 
 syntax keyword shaderlabUnityCGMacroType
       \ V2F_SCREEN_TYPE
+      \ UNITY_VPOS_TYPE
+
+syntax keyword shaderlabUnityCGMacroSemantics
+      \ FOGC
+      \ VFACE
 
 syntax keyword shaderlabUnityCGMacroConstant
       \ UNITY_PI
@@ -786,6 +795,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityCGType shaderlabType
     HiLink shaderlabUnityCGMacro shaderlabMacro
     HiLink shaderlabUnityCGMacroType shaderlabType
+    HiLink shaderlabUnityCGMacroSemantics shaderlabSemantics
     HiLink shaderlabUnityCGMacroConstant Constant
     HiLink shaderlabUnityCGMacroVariable shaderlabVariable
     HiLink shaderlabUnityCGMacroFunction shaderlabFunction
