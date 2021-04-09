@@ -9,6 +9,7 @@ elseif exists('b:current_syntax')
   finish
 endif
 
+syntax case ignore
 syntax keyword shaderlabKeyword
       \ Shader
       \ Category
@@ -25,6 +26,7 @@ syntax keyword shaderlabKeyword
       \ Offset
       \ ColorMaterial
       \ UsePass
+syntax case match
 
 syntax keyword shaderlabKeywordAlphaTest AlphaTest nextgroup=shaderlabKeywordValueAlphaTest skipwhite skipempty
 syntax keyword shaderlabKeywordValueAlphaTest
