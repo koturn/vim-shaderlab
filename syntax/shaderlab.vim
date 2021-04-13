@@ -20,8 +20,10 @@ syntax keyword shaderlabKeyword
       \ Tags
       \ LOD
       \ Fallback
+      \ CustomEditor
       \ Fog
       \ BindChannels
+      \ AlphaToMask
       \ ColorMask
       \ Offset
       \ ColorMaterial
@@ -41,7 +43,8 @@ syntax keyword shaderlabKeywordValueAlphaTest
       \ Never
       \ contained
 
-syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
+syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordIndexBlend,shaderlabKeywordValueBlend skipwhite skipempty
+syntax match shaderlabKeywordIndexBlend '\<[0-7]\>' contained nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
 syntax keyword shaderlabKeywordValueBlend
       \ One
       \ Zero
@@ -54,6 +57,33 @@ syntax keyword shaderlabKeywordValueBlend
       \ OneMinusDstColor
       \ OneMinusDstAlpha
       \ contained nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
+
+syntax keyword shaderlabKeywordBlendOp BlendOp nextgroup=shaderlabKeywordIndexBlendOp,shaderlabKeywordValueBlendOp skipwhite skipempty
+syntax match shaderlabKeywordIndexBlendOp '\<[0-7]\>' contained nextgroup=shaderlabKeywordValueBlendOp skipwhite skipempty
+syntax keyword shaderlabKeywordValueBlendOp
+      \ Add
+      \ Sub
+      \ RevSub
+      \ Min
+      \ Max
+      \ LogicalClear
+      \ LogicalSet
+      \ LogicalCopy
+      \ LogicalCopyInverted
+      \ LogicalNoop
+      \ LogicalInvert
+      \ LogicalAnd
+      \ LogicalNand
+      \ LogicalOr
+      \ LogicalNor
+      \ LogicalXor
+      \ LogicalEquiv
+      \ LogicalAndReverse
+      \ LogicalAndInverted
+      \ LogicalOrReverse
+      \ LogicalOrInverted
+      \ contained nextgroup=shaderlabKeywordCommaBlendOp skipwhite skipempty
+syntax match shaderlabKeywordCommaBlendOp ',' contained nextgroup=shaderlabKeywordValueBlendOp skipwhite skipempty
 
 syntax keyword shaderlabKeywordCull Cull nextgroup=shaderlabKeywordValueCull skipwhite skipempty
 syntax keyword shaderlabKeywordValueCull Back Front Off contained
@@ -750,6 +780,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabKeyword Keyword
   HiLink shaderlabKeywordAlphaTest shaderlabKeyword
   HiLink shaderlabKeywordBlend shaderlabKeyword
+  HiLink shaderlabKeywordBlendOp shaderlabKeyword
   HiLink shaderlabKeywordCull shaderlabKeyword
   HiLink shaderlabKeywordFog shaderlabKeyword
   HiLink shaderlabKeywordFogSub shaderlabKeyword
@@ -818,7 +849,10 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
 
   HiLink shaderlabKeywordValue Constant
   HiLink shaderlabKeywordValueAlphaTest shaderlabKeywordValue
+  HiLink shaderlabKeywordIndexBlend shaderlabKeywordValue
   HiLink shaderlabKeywordValueBlend shaderlabKeywordValue
+  HiLink shaderlabKeywordIndexBlendOp shaderlabKeywordValue
+  HiLink shaderlabKeywordValueBlendOp shaderlabKeywordValue
   HiLink shaderlabKeywordValueCull shaderlabKeywordValue
   HiLink shaderlabKeywordValueFogMode shaderlabKeywordValue
   HiLink shaderlabKeywordValueLighting shaderlabKeywordValue
