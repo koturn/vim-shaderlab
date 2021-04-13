@@ -142,7 +142,7 @@ syntax keyword shaderlabAttrType
 syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastopt\)\>\s*\]'
 syntax keyword shaderlabAttribute UNITY_BRANCH UNITY_FLATTEN UNITY_UNROLL UNITY_LOOP UNITY_FASTOPT
 
-syntax keyword shaderlabSemantics POSITION NORMAL TANGENT SV_POSITION COLOR SV_Target SV_Depth DEPTH
+syntax keyword shaderlabSemantics POSITION NORMAL TANGENT SV_POSITION COLOR SV_Target SV_Depth DEPTH FACE SV_IsFrontFace
 syntax match shaderlabSemantics '\<\%(TEXCOORD\|SV_Target\|COLOR\)\d\>'
 
 syntax keyword shaderlabFunction
@@ -326,7 +326,6 @@ syntax keyword shaderlabMacro
       \ UNITY_UV_STARTS_AT_TOP
       \ UNITY_MIGHT_NOT_HAVE_DEPTH_Texture
       \ UNITY_PROJ_COORD
-      \ UNITY_NEAR_CLIP_VALUE
       \ UNITY_CAN_COMPILE_TESSELLATION
       \ UNITY_INITIALIZE_OUTPUT
       \ UNITY_COMPILER_HLSL
@@ -339,6 +338,10 @@ syntax keyword shaderlabMacro
       \ UNITY_DECLARE_TEX3D
       \ UNITY_DECLARE_TEX3D_NOSAMPLER
       \ UNITY_DECLARE_TEX3DARRAY
+      \ UNITY_DECLARE_SCREENSPACE_SHADOWMAP
+      \ UNITY_DECLARE_DEPTH_TEXTURE_MS
+      \ UNITY_DECLARE_DEPTH_TEXTURE
+      \ UNITY_DECLARE_SCREENSPACE_TEXTURE
       \ UNITY_PASS_FORWARDBASE
       \ UNITY_PASS_FORWARDADD
       \ UNITY_PASS_DEFERRED
@@ -428,6 +431,7 @@ syntax keyword shaderlabMacroConstant
       \ UNITY_MATRIX_TEXTURE1
       \ UNITY_MATRIX_TEXTURE2
       \ UNITY_MATRIX_TEXTURE3
+      \ UNITY_NEAR_CLIP_VALUE
 
 syntax keyword shaderlabVariable
       \ _Time
@@ -534,6 +538,14 @@ syntax keyword shaderlabConstant true false
 
 syntax keyword shaderlabUnityCGMacro
       \ TANGENT_SPACE_ROTATION
+      \ V2F_SHADOW_CASTER_NOPOS
+      \ TRANSFER_SHADOW_CASTER_NOPOS_LEGACY
+      \ TRANSFER_SHADOW_CASTER_NOPOS
+      \ SHADOW_CASTER_FRAGMENT
+      \ V2F_SHADOW_CASTER
+      \ TRANSFER_SHADOW_CASTER_NORMALOFFSET
+      \ TRANSFER_SHADOW_CASTER
+      \ UNITY_OPAQUE_ALPHA
       \ UNITY_CALC_FOG_FACTOR_RAW
       \ UNITY_CALC_FOG_FACTOR
       \ UNITY_FOG_COORDS_PACKED
@@ -603,7 +615,6 @@ syntax keyword shaderlabUnityCGMacroFunction
       \ UnityStereoScreenSpaceUVAdjust
       \ DECODE_EYEDEPTH
       \ COMPUTE_EYEDEPTH
-      \ UNITY_OPAQUE_ALPHA
       \ UNITY_Z_0_FAR_FROM_CLIPSPACE
       \ UNITY_APPLY_DITHER_CROSSFADE
 
@@ -694,6 +705,127 @@ syntax keyword shaderlabUnityCGFunction
       \ UnpackHeightmap
       \ UnityApplyDitherCrossFade
 
+if !exists('shaderlab_no_unity_standard_utils')
+  syntax keyword shaderlabUnityStandardUtilsFunction
+        \ SpecularStrength
+        \ EnergyConservationBetweenDiffuseAndSpecular
+        \ OneMinusReflectivityFromMetallic
+        \ DiffuseAndSpecularFromMetallic
+        \ PreMultiplyAlpha
+        \ ParallaxOffset1Step
+        \ LerpOneTo
+        \ LerpWhiteTo
+        \ UnpackScaleNormalDXT5nm
+        \ UnpackScaleNormalRGorAG
+        \ UnpackScaleNormal
+        \ BlendNormals
+        \ CreateTangentToWorldPerVertex
+        \ ShadeSHPerVertex
+        \ ShadeSHPerPixel
+        \ BoxProjectedCubemapDirection
+        \ CalculateSurfaceGradient
+        \ PerturbNormal
+        \ CalculateSurfaceNormal
+endif
+
+" From UnityShadowLibrary.cginc
+if !exists('shaderlab_no_unity_shadow_library')
+  syntax keyword shaderlabUnityShadowLibraryMacroType
+        \ unityShadowCoord
+        \ unityShadowCoord2
+        \ unityShadowCoord3
+        \ unityShadowCoord4
+        \ unityShadowCoord4x4
+
+  syntax keyword shaderlabUnityShadowLibraryMacroVariable
+        \ _ShadowOffsets
+        \ _ShadowMapTexture_TexelSize
+
+  syntax keyword shaderlabUnityShadowLibraryFunction
+        \ UnitySampleShadowmap_PCF7x7
+        \ UnitySampleShadowmap_PCF5x5
+        \ UnitySampleShadowmap_PCF3x3
+        \ UnityGetReceiverPlaneDepthBias
+        \ UnitySampleShadowmap
+        \ SampleCubeDistance
+        \ LPPV_SampleProbeOcclusion
+        \ UnitySampleBakedOcclusion
+        \ UnityGetRawBakedOcclusions
+        \ UnityMixRealtimeAndBakedShadows
+        \ UnityComputeShadowFadeDistance
+        \ UnityComputeShadowFade
+        \ UnityGetReceiverPlaneDepthBias
+        \ UnityCombineShadowcoordComponents
+        \ _UnityInternalGetAreaAboveFirstTexelUnderAIsocelesRectangleTriangle
+        \ _UnityInternalGetAreaPerTexel_3TexelsWideTriangleFilter
+        \ _UnityInternalGetWeightPerTexel_3TexelsWideTriangleFilter
+        \ _UnityInternalGetWeightPerTexel_5TexelsWideTriangleFilter
+        \ _UnityInternalGetWeightPerTexel_7TexelsWideTriangleFilter
+        \ UnitySampleShadowmap_PCF3x3NoHardwareSupport
+        \ UnitySampleShadowmap_PCF3x3Tent
+        \ UnitySampleShadowmap_PCF5x5Tent
+        \ UnitySampleShadowmap_PCF7x7Tent
+        \ UnitySampleShadowmap_PCF3x3Gaussian
+        \ UnitySampleShadowmap_PCF5x5Gaussian
+        \ UnitySampleShadowmap_PCF3x3
+        \ UnitySampleShadowmap_PCF5x5
+        \ UnitySampleShadowmap_PCF7x7
+endif
+
+" From AutoLight.cginc
+if !exists('shaderlab_no_autolight')
+  syntax keyword shaderlabAutoLightMacro
+        \ SHADOW_COORDS
+        \ UNITY_SHADOW_COORDS
+        \ UNITY_TRANSFER_SHADOW
+        \ UNITY_LIGHT_ATTENUATION
+        \ DECLARE_LIGHT_COORD
+        \ DECLARE_LIGHT_COORDS
+        \ COMPUTE_LIGHT_COORDS
+        \ LIGHT_ATTENUATION
+        \ UNITY_LIGHTING_COORDS
+        \ LIGHTING_COORDS
+        \ UNITY_TRANSFER_LIGHTING
+        \ TRANSFER_VERTEX_TO_FRAGMENT
+
+  syntax keyword shaderlabAutoLightMacroVariable
+        \ _ShadowMapTexture
+        \ _LightTexture0
+        \ unity_WorldToLight
+        \ _LightTextureB0
+
+  syntax keyword shaderlabAutoLightMacroFunction
+        \ SHADOW_ATTENUATION
+        \ UNITY_SHADOW_W
+        \ UNITY_READ_SHADOW_COORDS
+        \ UNITY_SHADOW_ATTENUATION
+
+  syntax keyword shaderlabAutoLightFunction
+        \ unitySampleShadow
+        \ UnityComputeForwardShadows
+        \ UnitySpotCookie
+        \ UnitySpotAttenuate
+endif
+
+" From Lighting.cginc
+if !exists('shaderlab_no_lighting')
+  syntax keyword shaderlabLightingVariable
+        \ UNITY_DIRBASIS
+  syntax keyword shaderlabLightingFunction
+        \ UnityLambertLight
+        \ LightingLambert
+        \ LightingLambert_Deferred
+        \ LightingLambert_GI
+        \ LightingLambert_PrePass
+        \ UnityBlinnPhongLight
+        \ LightingBlinnPhong
+        \ LightingBlinnPhong_Deferred
+        \ LightingBlinnPhong_GI
+        \ LightingBlinnPhong_PrePass
+        \ UnityTessellationFactors
+        \ DirLightmapDiffuse
+endif
+
 if !exists('shaderlab_no_crt')
   syntax keyword shaderlabCRTType
         \ appdata_customrendertexture
@@ -736,9 +868,9 @@ syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 
 syntax match shaderlabNumber '\<\d\+\>'
 
-syntax match shaderlabFloat '\d\+\.\d*\%([Ee][-+]\?\d\+\)\?[FHfh]\?'
-syntax match shaderlabFloat '\.\d\+\%([Ee][-+]\?\d\+\)\?[FHfh]\?'
-syntax match shaderlabFloat '\d\+e[-+]\?\d\+[FHfh]\?'
+syntax match shaderlabFloat '\<\d\+\.\d*\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
+syntax match shaderlabFloat '\<\.\d\+\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
+syntax match shaderlabFloat '\<\d\+e[-+]\?\d\+[FHfh]\?\>'
 
 syntax match shaderlabOperator "\v\="
 syntax match shaderlabOperator "\v\*"
@@ -835,6 +967,24 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityCGConstant Constant
     HiLink shaderlabUnityCGVariable shaderlabVariable
     HiLink shaderlabUnityCGFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_unity_standard_utils')
+    syntax keyword shaderlabUnityStandardUtilsFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_unity_shadow_library')
+    HiLink shaderlabUnityShadowLibraryMacroType shaderlabType
+    HiLink shaderlabUnityShadowLibraryMacroVariable shaderlabVariable
+    HiLink shaderlabUnityShadowLibraryFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_autolight')
+    HiLink shaderlabAutoLightMacro shaderlabMacro
+    HiLink shaderlabAutoLightMacroVariable shaderlabMacroVariable
+    HiLink shaderlabAutoLightMacroFunction shaderlabAutoLightFunction
+    HiLink shaderlabAutoLightFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_lighting')
+    HiLink shaderlabLightingVariable shaderlabVariable
+    HiLink shaderlabLightingFunction shaderlabFunction
   endif
   if !exists('shaderlab_no_crt')
     HiLink shaderlabCRTType Type
