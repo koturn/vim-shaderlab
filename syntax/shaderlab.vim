@@ -115,9 +115,9 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
 
-syntax keyword shaderlabType void bool SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
-syntax match shaderlabType '\<\%(fixed\|half\|\%(min1[06]\)\?float\|[u]\?int\)\%([1-4]x[1-4]\|[2-4]\)\?\>'
-syntax match shaderlabType '\<min16uint[1-4]\?\>'
+syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
+syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?[u]\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
+syntax match shaderlabType '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
 syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
 syntax match shaderlabType '\<Texture\%(2D\%(Array\|MS\)\?\|Cube\%(Array\)\?\|3D\)\%(_\%(half\|float\)\)\?\>'
 
