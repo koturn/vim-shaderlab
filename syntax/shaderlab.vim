@@ -115,7 +115,7 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
 
-syntax keyword shaderlabType void bool SurfaceOutput struct v2f
+syntax keyword shaderlabType void bool SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
 syntax match shaderlabType '\<\%(fixed\|half\|\%(min1[06]\)\?float\|[u]\?int\)\%([1-4]x[1-4]\|[2-4]\)\?\>'
 syntax match shaderlabType '\<min16uint[1-4]\?\>'
 syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
@@ -140,6 +140,7 @@ syntax keyword shaderlabAttrType
       \ Toggle
 
 syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastopt\)\>\s*\]'
+syntax match shaderlabAttribute '\[\s*\<maxvertexcount\>\s*(\s*\d\+\s*)\s*\]'
 syntax keyword shaderlabAttribute UNITY_BRANCH UNITY_FLATTEN UNITY_UNROLL UNITY_LOOP UNITY_FASTOPT
 
 syntax keyword shaderlabSemantics POSITION NORMAL TANGENT SV_POSITION COLOR SV_Target SV_Depth DEPTH FACE SV_IsFrontFace
