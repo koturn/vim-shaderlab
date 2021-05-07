@@ -305,6 +305,7 @@ syntax keyword shaderlabFunction5
       \ reversebits
 
 syntax keyword shaderlabMacro
+      \ SHADER_TARGET
       \ SHADER_API_D3D11
       \ SHADER_API_GLCORE
       \ SHADER_API_GLES
@@ -334,7 +335,13 @@ syntax keyword shaderlabMacro
       \ UNITY_COMPILER_CG
       \ UNITY_DECLARE_SHADOWMAP
       \ UNITY_DECLARE_TEX2D
+      \ UNITY_DECLARE_TEX2D_HALF
+      \ UNITY_DECLARE_TEX2D_FLOAT
       \ UNITY_DECLARE_TEX2D_NOSAMPLER
+      \ UNITY_DECLARE_TEX2D_NOSAMPLER_HALF
+      \ UNITY_DECLARE_TEX2D_NOSAMPLER_FLOAT
+      \ UNITY_DECLARE_TEX2D_NOSAMPLER_INT
+      \ UNITY_DECLARE_TEX2D_NOSAMPLER_UINT
       \ UNITY_DECLARE_TEX2DARRAY
       \ UNITY_DECLARE_TEX3D
       \ UNITY_DECLARE_TEX3D_NOSAMPLER
@@ -350,12 +357,6 @@ syntax keyword shaderlabMacro
       \ UNITY_PASS_PREPASSBASE
       \ UNITY_PASS_PREPASSFINAL
       \ UNITY_SHADER_NO_UPGRADE
-      \ UNITY_INSTANCING_BUFFER_START
-      \ UNITY_DEFINE_INSTANCED_PROP
-      \ UNITY_INSTANCING_BUFFER_END
-      \ UNITY_SETUP_INSTANCE_ID
-      \ UNITY_TRANSFER_INSTANCE_ID
-      \ UNITY_ACCESS_INSTANCED_PROP
       \ UNITY_VERTEX_INPUT_INSTANCE_ID
       \ CBUFFER_START
       \ CBUFFER_END
@@ -531,180 +532,249 @@ syntax keyword shaderlabVariable
       \ unity_MatrixMV
       \ unity_MatrixTMV
       \ unity_MatrixITMV
-      \ v2f_vertex_lit
-      \ appdata_img
-      \ v2f_img
 
 syntax keyword shaderlabConstant true false
 
-syntax keyword shaderlabUnityCGMacro
-      \ TANGENT_SPACE_ROTATION
-      \ V2F_SHADOW_CASTER_NOPOS
-      \ TRANSFER_SHADOW_CASTER_NOPOS_LEGACY
-      \ TRANSFER_SHADOW_CASTER_NOPOS
-      \ SHADOW_CASTER_FRAGMENT
-      \ V2F_SHADOW_CASTER
-      \ TRANSFER_SHADOW_CASTER_NORMALOFFSET
-      \ TRANSFER_SHADOW_CASTER
-      \ UNITY_OPAQUE_ALPHA
-      \ UNITY_CALC_FOG_FACTOR_RAW
-      \ UNITY_CALC_FOG_FACTOR
-      \ UNITY_FOG_COORDS_PACKED
-      \ UNITY_FOG_COORDS
-      \ UNITY_TRANSFER_FOG
-      \ UNITY_TRANSFER_FOG_COMBINED_WITH_TSPACE
-      \ UNITY_TRANSFER_FOG_COMBINED_WITH_WORLD_POS
-      \ UNITY_TRANSFER_FOG_COMBINED_WITH_EYE_VEC
-      \ UNITY_FOG_LERP_COLOR
-      \ UNITY_APPLY_FOG_COLOR
-      \ UNITY_EXTRACT_FOG
-      \ UNITY_EXTRACT_FOG_FROM_TSPACE
-      \ UNITY_EXTRACT_FOG_FROM_WORLD_POS
-      \ UNITY_EXTRACT_FOG_FROM_EYE_VEC
-      \ UNITY_APPLY_FOG
-      \ UNITY_EXTRACT_TBN_0
-      \ UNITY_EXTRACT_TBN_1
-      \ UNITY_EXTRACT_TBN_2
-      \ UNITY_EXTRACT_TBN
-      \ UNITY_EXTRACT_TBN_T
-      \ UNITY_EXTRACT_TBN_N
-      \ UNITY_EXTRACT_TBN_B
-      \ UNITY_CORRECT_TBN_B_SIGN
-      \ UNITY_RECONSTRUCT_TBN_0
-      \ UNITY_RECONSTRUCT_TBN_1
-      \ UNITY_RECONSTRUCT_TBN_2
-      \ UNITY_RECONSTRUCT_TBN
-      \ UNITY_DITHER_CROSSFADE_COORDS
-      \ UNITY_DITHER_CROSSFADE_COORDS_IDX
-      \ UNITY_TRANSFER_DITHER_CROSSFADE
-      \ UNITY_TRANSFER_DITHER_CROSSFADE_HPOS
-      \ V2F_SHADOW_COLLECTOR
-      \ TRANSFER_SHADOW_COLLECTOR
-      \ SAMPLE_SHADOW_COLLECTOR_SHADOW
-      \ COMPUTE_SHADOW_COLLECTOR_SHADOW
-      \ SHADOW_COLLECTOR_FRAGMENT
-      \ UNITY_TRANSFER_DEPTH
-      \ UNITY_OUTPUT_DEPTH
 
-syntax keyword shaderlabUnityCGMacroType
-      \ V2F_SCREEN_TYPE
-      \ UNITY_VPOS_TYPE
+if !exists('shaderlab_no_unitycg')
+  syntax keyword shaderlabUnityCGType
+        \ appdata_base
+        \ appdata_tan
+        \ appdata_full
+        \ appdata_img
+        \ v2f_vertex_lit
+        \ v2f_img
 
-syntax keyword shaderlabUnityCGMacroSemantics
-      \ FOGC
-      \ VFACE
+  syntax keyword shaderlabUnityCGMacro
+        \ TANGENT_SPACE_ROTATION
+        \ V2F_SHADOW_CASTER_NOPOS
+        \ TRANSFER_SHADOW_CASTER_NOPOS_LEGACY
+        \ TRANSFER_SHADOW_CASTER_NOPOS
+        \ SHADOW_CASTER_FRAGMENT
+        \ V2F_SHADOW_CASTER
+        \ TRANSFER_SHADOW_CASTER_NORMALOFFSET
+        \ TRANSFER_SHADOW_CASTER
+        \ UNITY_OPAQUE_ALPHA
+        \ UNITY_CALC_FOG_FACTOR_RAW
+        \ UNITY_CALC_FOG_FACTOR
+        \ UNITY_FOG_COORDS_PACKED
+        \ UNITY_FOG_COORDS
+        \ UNITY_TRANSFER_FOG
+        \ UNITY_TRANSFER_FOG_COMBINED_WITH_TSPACE
+        \ UNITY_TRANSFER_FOG_COMBINED_WITH_WORLD_POS
+        \ UNITY_TRANSFER_FOG_COMBINED_WITH_EYE_VEC
+        \ UNITY_FOG_LERP_COLOR
+        \ UNITY_APPLY_FOG_COLOR
+        \ UNITY_EXTRACT_FOG
+        \ UNITY_EXTRACT_FOG_FROM_TSPACE
+        \ UNITY_EXTRACT_FOG_FROM_WORLD_POS
+        \ UNITY_EXTRACT_FOG_FROM_EYE_VEC
+        \ UNITY_APPLY_FOG
+        \ UNITY_EXTRACT_TBN_0
+        \ UNITY_EXTRACT_TBN_1
+        \ UNITY_EXTRACT_TBN_2
+        \ UNITY_EXTRACT_TBN
+        \ UNITY_EXTRACT_TBN_T
+        \ UNITY_EXTRACT_TBN_N
+        \ UNITY_EXTRACT_TBN_B
+        \ UNITY_CORRECT_TBN_B_SIGN
+        \ UNITY_RECONSTRUCT_TBN_0
+        \ UNITY_RECONSTRUCT_TBN_1
+        \ UNITY_RECONSTRUCT_TBN_2
+        \ UNITY_RECONSTRUCT_TBN
+        \ UNITY_DITHER_CROSSFADE_COORDS
+        \ UNITY_DITHER_CROSSFADE_COORDS_IDX
+        \ UNITY_TRANSFER_DITHER_CROSSFADE
+        \ UNITY_TRANSFER_DITHER_CROSSFADE_HPOS
+        \ V2F_SHADOW_COLLECTOR
+        \ TRANSFER_SHADOW_COLLECTOR
+        \ SAMPLE_SHADOW_COLLECTOR_SHADOW
+        \ COMPUTE_SHADOW_COLLECTOR_SHADOW
+        \ SHADOW_COLLECTOR_FRAGMENT
+        \ UNITY_TRANSFER_DEPTH
+        \ UNITY_OUTPUT_DEPTH
 
-syntax keyword shaderlabUnityCGMacroConstant
-      \ UNITY_PI
-      \ UNITY_TWO_PI
-      \ UNITY_FOUR_PI
-      \ UNITY_INV_PI
-      \ UNITY_INV_TWO_PI
-      \ UNITY_INV_FOUR_PI
-      \ UNITY_HALF_PI
-      \ UNITY_INV_HALF_PI
-      \ LIGHTMAP_RGBM_SCALE
-      \ EMISSIVE_RGBM_SCALE
+  syntax keyword shaderlabUnityCGMacroType
+        \ V2F_SCREEN_TYPE
+        \ UNITY_VPOS_TYPE
 
-syntax keyword shaderlabUnityCGMacroVariable
-      \ COMPUTE_DEPTH_01
-      \ COMPUTE_VIEW_NORMAL
+  syntax keyword shaderlabUnityCGMacroSemantics
+        \ FOGC
+        \ VFACE
 
-syntax keyword shaderlabUnityCGMacroFunction
-      \ TRANSFORM_TEX
-      \ TRANSFORM_UV
-      \ UnityStereoScreenSpaceUVAdjust
-      \ DECODE_EYEDEPTH
-      \ COMPUTE_EYEDEPTH
-      \ UNITY_Z_0_FAR_FROM_CLIPSPACE
-      \ UNITY_APPLY_DITHER_CROSSFADE
+  syntax keyword shaderlabUnityCGMacroConstant
+        \ UNITY_PI
+        \ UNITY_TWO_PI
+        \ UNITY_FOUR_PI
+        \ UNITY_INV_PI
+        \ UNITY_INV_TWO_PI
+        \ UNITY_INV_FOUR_PI
+        \ UNITY_HALF_PI
+        \ UNITY_INV_HALF_PI
+        \ LIGHTMAP_RGBM_SCALE
+        \ EMISSIVE_RGBM_SCALE
 
-syntax keyword shaderlabUnityCGConstant
-      \ unity_ColorSpaceGrey
-      \ unity_ColorSpaceDouble
-      \ unity_ColorSpaceDielectricSpec
-      \ unity_ColorSpaceLuminance
+  syntax keyword shaderlabUnityCGMacroVariable
+        \ COMPUTE_DEPTH_01
+        \ COMPUTE_VIEW_NORMAL
 
-syntax keyword shaderlabUnityCGVariable
-      \ unity_Lightmap_HDR
-      \ unity_DynamicLightmap_HDR
-      \ unity_DitherMask
+  syntax keyword shaderlabUnityCGMacroFunction
+        \ TRANSFORM_TEX
+        \ TRANSFORM_UV
+        \ UnityStereoScreenSpaceUVAdjust
+        \ DECODE_EYEDEPTH
+        \ COMPUTE_EYEDEPTH
+        \ UNITY_Z_0_FAR_FROM_CLIPSPACE
+        \ UNITY_APPLY_DITHER_CROSSFADE
 
-syntax keyword shaderlabUnityCGFunction
-      \ IsGammaSpace
-      \ GammaToLinearSpaceExact
-      \ GammaToLinearSpace
-      \ LinearToGammaSpaceExact
-      \ LinearToGammaSpace
-      \ UnityWorldToClipPos
-      \ UnityViewToClipPos
-      \ UnityObjectToViewPos
-      \ UnityWorldToViewPos
-      \ UnityObjectToWorldDir
-      \ UnityWorldToObjectDir
-      \ UnityObjectToWorldNormal
-      \ UnityWorldSpaceLightDir
-      \ WorldSpaceLightDir
-      \ ObjSpaceLightDir
-      \ UnityWorldSpaceViewDir
-      \ WorldSpaceViewDir
-      \ ObjSpaceViewDir
-      \ Shade4PointLights
-      \ ShadeVertexLightsFull
-      \ ShadeVertexLights
-      \ SHEvalLinearL0L1
-      \ SHEvalLinearL2
-      \ ShadeSH9
-      \ ShadeSH3Order
-      \ SHEvalLinearL0L1_SampleProbeVolume
-      \ ShadeSH12Order
-      \ VertexLight
-      \ ParallaxOffset
-      \ Luminance
-      \ LinearRgbToLuminance
-      \ UnityEncodeRGBM
-      \ DecodeHDR
-      \ DecodeLightmapRGBM
-      \ DecodeLightmapDoubleLDR
-      \ DecodeLightmap
-      \ DecodeRealtimeLightmap
-      \ DecodeDirectionalLightmap
-      \ EncodeFloatRGBA
-      \ DecodeFloatRGBA
-      \ EncodeFloatRG
-      \ DecodeFloatRG
-      \ EncodeViewNormalStereo
-      \ DecodeViewNormalStereo
-      \ EncodeDepthNormal
-      \ DecodeDepthNormal
-      \ UnpackNormalDXT5nm
-      \ UnpackNormalmapRGorAG
-      \ UnpackNormal
-      \ UnpackNormalWithScale
-      \ Linear01Depth
-      \ LinearEyeDepth
-      \ UnityStereoScreenSpaceUVAdjustInternal
-      \ UnityStereoScreenSpaceUVAdjustInternal
-      \ TransformStereoScreenSpaceTex
-      \ UnityStereoTransformScreenSpaceTex
-      \ UnityStereoTransformScreenSpaceTex
-      \ UnityStereoClamp
-      \ MultiplyUV
-      \ vert_img
-      \ ComputeNonStereoScreenPos
-      \ ComputeScreenPos
-      \ ComputeGrabScreenPos
-      \ UnityPixelSnap
-      \ TransformViewToProjection
-      \ TransformViewToProjection
-      \ UnityEncodeCubeShadowDepth
-      \ UnityDecodeCubeShadowDepth
-      \ UnityClipSpaceShadowCasterPos
-      \ UnityClipSpaceShadowCasterPos
-      \ UnityApplyLinearShadowBias
-      \ PackHeightmap
-      \ UnpackHeightmap
-      \ UnityApplyDitherCrossFade
+  syntax keyword shaderlabUnityCGConstant
+        \ unity_ColorSpaceGrey
+        \ unity_ColorSpaceDouble
+        \ unity_ColorSpaceDielectricSpec
+        \ unity_ColorSpaceLuminance
+
+  syntax keyword shaderlabUnityCGVariable
+        \ unity_Lightmap_HDR
+        \ unity_DynamicLightmap_HDR
+        \ unity_DitherMask
+
+  syntax keyword shaderlabUnityCGFunction
+        \ IsGammaSpace
+        \ GammaToLinearSpaceExact
+        \ GammaToLinearSpace
+        \ LinearToGammaSpaceExact
+        \ LinearToGammaSpace
+        \ UnityWorldToClipPos
+        \ UnityViewToClipPos
+        \ UnityObjectToViewPos
+        \ UnityWorldToViewPos
+        \ UnityObjectToWorldDir
+        \ UnityWorldToObjectDir
+        \ UnityObjectToWorldNormal
+        \ UnityWorldSpaceLightDir
+        \ WorldSpaceLightDir
+        \ ObjSpaceLightDir
+        \ UnityWorldSpaceViewDir
+        \ WorldSpaceViewDir
+        \ ObjSpaceViewDir
+        \ Shade4PointLights
+        \ ShadeVertexLightsFull
+        \ ShadeVertexLights
+        \ SHEvalLinearL0L1
+        \ SHEvalLinearL2
+        \ ShadeSH9
+        \ ShadeSH3Order
+        \ SHEvalLinearL0L1_SampleProbeVolume
+        \ ShadeSH12Order
+        \ VertexLight
+        \ ParallaxOffset
+        \ Luminance
+        \ LinearRgbToLuminance
+        \ UnityEncodeRGBM
+        \ DecodeHDR
+        \ DecodeLightmapRGBM
+        \ DecodeLightmapDoubleLDR
+        \ DecodeLightmap
+        \ DecodeRealtimeLightmap
+        \ DecodeDirectionalLightmap
+        \ EncodeFloatRGBA
+        \ DecodeFloatRGBA
+        \ EncodeFloatRG
+        \ DecodeFloatRG
+        \ EncodeViewNormalStereo
+        \ DecodeViewNormalStereo
+        \ EncodeDepthNormal
+        \ DecodeDepthNormal
+        \ UnpackNormalDXT5nm
+        \ UnpackNormalmapRGorAG
+        \ UnpackNormal
+        \ UnpackNormalWithScale
+        \ Linear01Depth
+        \ LinearEyeDepth
+        \ UnityStereoScreenSpaceUVAdjustInternal
+        \ UnityStereoScreenSpaceUVAdjustInternal
+        \ TransformStereoScreenSpaceTex
+        \ UnityStereoTransformScreenSpaceTex
+        \ UnityStereoTransformScreenSpaceTex
+        \ UnityStereoClamp
+        \ MultiplyUV
+        \ vert_img
+        \ ComputeNonStereoScreenPos
+        \ ComputeScreenPos
+        \ ComputeGrabScreenPos
+        \ UnityPixelSnap
+        \ TransformViewToProjection
+        \ TransformViewToProjection
+        \ UnityEncodeCubeShadowDepth
+        \ UnityDecodeCubeShadowDepth
+        \ UnityClipSpaceShadowCasterPos
+        \ UnityClipSpaceShadowCasterPos
+        \ UnityApplyLinearShadowBias
+        \ PackHeightmap
+        \ UnpackHeightmap
+        \ UnityApplyDitherCrossFade
+endif
+
+if !exists('shaderlab_no_unity_instancing')
+  syntax keyword shaderlabUnityInstancingMacro
+        \ UNITY_SUPPORT_INSTANCING
+        \ UNITY_SUPPORT_STEREO_INSTANCING
+        \ UNITY_INSTANCING_SUPPORT_FLEXIBLE_ARRAY_SIZE
+        \ UNITY_INSTANCING_ENABLED
+        \ UNITY_PROCEDURAL_INSTANCING_ENABLED
+        \ UNITY_STEREO_INSTANCING_ENABLED
+        \ UNITY_INSTANCING_CBUFFER_SCOPE_BEGIN
+        \ UNITY_INSTANCING_CBUFFER_SCOPE_END
+        \ DEFAULT_UNITY_VERTEX_INPUT_INSTANCE_ID
+        \ UNITY_VERTEX_INPUT_INSTANCE_ID
+        \ DEFAULT_UNITY_VERTEX_OUTPUT_STEREO
+        \ DEFAULT_UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO
+        \ DEFAULT_UNITY_VERTEX_OUTPUT_STEREO_EYE_INDEX
+        \ DEFAULT_UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX
+        \ DEFAULT_UNITY_TRANSFER_VERTEX_OUTPUT_STEREO
+        \ DEFAULT_UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
+        \ UNITY_VERTEX_OUTPUT_STEREO_EYE_INDEX
+        \ UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX
+        \ UNITY_VERTEX_OUTPUT_STEREO
+        \ UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO
+        \ UNITY_TRANSFER_VERTEX_OUTPUT_STEREO
+        \ UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
+        \ UNITY_TRANSFER_INSTANCE_ID
+        \ UNITY_INSTANCING_BUFFER_START
+        \ UNITY_INSTANCING_BUFFER_END
+        \ UNITY_DEFINE_INSTANCED_PROP
+        \ UNITY_ACCESS_INSTANCED_PROP
+        \ UNITY_USE_LODFADE_ARRAY
+        \ UNITY_USE_RENDERINGLAYER_ARRAY
+        \ UNITY_USE_LIGHTMAPST_ARRAY
+        \ UNITY_USE_DYNAMICLIGHTMAPST_ARRAY
+        \ UNITY_USE_SHCOEFFS_ARRAYS
+  syntax keyword shaderlabUnityInstancingMacroFunction
+        \ UNITY_GET_INSTANCE_ID
+        \ DEFAULT_UNITY_SETUP_INSTANCE_ID
+        \ UNITY_SETUP_INSTANCE_ID
+        \ UnityObjectToClipPosInstanced
+
+  syntax keyword shaderlabUnityInstancingFunction
+        \ UnitySetupInstanceID
+        \ UnitySetupCompoundMatrices
+        \ UNITY_INSTANCING_PROCEDURAL_FUNC
+
+  syntax keyword shaderlabUnityInstancingVariable
+        \ unity_InstanceID
+        \ unity_BaseInstanceID
+        \ unity_InstanceCount
+        \ unity_MatrixMVP_
+        \ unity_MatrixMV_I
+        \ unity_MatrixTMV_
+        \ unity_MatrixITMV
+
+  syntax keyword shaderlabUnityInstancingConstant
+        \ UNITY_FORCE_MAX_INSTANCE_COUNT
+        \ UNITY_MAX_INSTANCE_COUNT
+        \ UNITY_INSTANCED_ARRAY_SIZE
+        \ UNITY_WORLDTOOBJECTARRAY_CB
+endif
 
 if !exists('shaderlab_no_unity_standard_utils')
   syntax keyword shaderlabUnityStandardUtilsFunction
@@ -888,7 +958,7 @@ syntax match shaderlabSwizzleOperator '\.\s*\<\%([xyzw]\{1,4\}\|[rgba]\{1,4\}\|[
 
 " syntax match shaderlabCommentL '\v\/\/.*$'
 syntax region shaderlabCommentL start="//" skip="\\$" end="$" keepend contains=@Spell
-if exists("c_no_comment_fold")
+if exists("shaderlab_no_comment_fold")
   syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell extend
 else
   syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell fold extend
@@ -968,6 +1038,13 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityCGConstant Constant
     HiLink shaderlabUnityCGVariable shaderlabVariable
     HiLink shaderlabUnityCGFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_unity_instancing')
+    HiLink shaderlabUnityInstancingMacro shaderlabMacro
+    HiLink shaderlabUnityInstancingMacroFunction shaderlabMacroFunction
+    HiLink shaderlabUnityInstancingFunction shaderlabFunction
+    HiLink shaderlabUnityInstancingVariable shaderlabVariable
+    HiLink shaderlabUnityInstancingConstant shaderlabConstant
   endif
   if !exists('shaderlab_no_unity_standard_utils')
     syntax keyword shaderlabUnityStandardUtilsFunction shaderlabFunction
