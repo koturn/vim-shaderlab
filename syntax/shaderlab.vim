@@ -116,7 +116,7 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
 
 syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
-syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?[u]\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
+syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
 syntax match shaderlabType '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
 syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
 syntax match shaderlabType '\<Texture\%(2D\%(Array\|MS\)\?\|Cube\%(Array\)\?\|3D\)\%(_\%(half\|float\)\)\?\>'
@@ -963,15 +963,15 @@ syntax match shaderlabSwizzleOperator '\.\s*\<\%([xyzw]\{1,4\}\|[rgba]\{1,4\}\|[
 syntax region shaderlabCommentL start="//" skip="\\$" end="$" keepend contains=@Spell
 if exists("shaderlab_no_comment_fold")
   syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell extend
-  syntax region shaderlabComment matchgroup=shaderlabCommentStart start='#\s*if\s\+0' end='#\s*\%(elif\|else\|endif\)' contains=shaderlabCommentStartError,@Spell extend
+  syntax region shaderlabComment matchgroup=shaderlabCommentStart start='#\s*if\s\+0' end='#\s*e\%(l\%(if\|se\)\|ndif\)' contains=shaderlabCommentStartError,@Spell extend
 else
   syntax region shaderlabComment matchgroup=shaderlabCommentStart start="/\*" end="\*/" contains=shaderlabCommentStartError,@Spell fold extend
-  syntax region shaderlabComment matchgroup=shaderlabCommentStart start='#\s*if\s\+0' end='#\s*\%(elif\|else\|endif\)' contains=shaderlabCommentStartError,@Spell fold extend
+  syntax region shaderlabComment matchgroup=shaderlabCommentStart start='#\s*if\s\+0' end='#\s*e\%(l\%(if\|se\)\|ndif\)' contains=shaderlabCommentStartError,@Spell fold extend
 endif
 syntax match shaderlabCommentError display "\*/"
 syntax match shaderlabCommentStartError display "/\*"me=e-1 contained
 
-syntax region shaderlabPreProc start="^\s*\zs\%(%:\|#\)\s*\%(pragma\|include\|define\|undef\|ifn\?def\|if\|elif\|else\|endif\|line\|error\)\>" skip="\\$" end="$" keepend contains=ALLBUT,shaderlabConditional
+syntax region shaderlabPreProc start="^\s*\zs\%(%:\|#\)\s*\%(pragma\|include\|define\|undef\|if\%(n\?def\)\?\|el\%(if\|se\)\|endif\|line\|error\)\>" skip="\\$" end="$" keepend contains=ALLBUT,shaderlabConditional
 
 
 " Define the default highlighting.
