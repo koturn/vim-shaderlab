@@ -28,6 +28,7 @@ syntax keyword shaderlabKeyword
       \ Offset
       \ ColorMaterial
       \ UsePass
+      \ GrabPass
 syntax case match
 
 syntax keyword shaderlabKeywordAlphaTest AlphaTest nextgroup=shaderlabKeywordValueAlphaTest skipwhite skipempty
@@ -442,6 +443,7 @@ syntax keyword shaderlabVariable
       \ _Time
       \ _SinTime
       \ _CosTime
+      \ _GrabTexture
       \ unity_DeltaTime
       \ _WorldSpaceCameraPos
       \ _ProjectionParams
