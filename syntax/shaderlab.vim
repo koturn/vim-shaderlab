@@ -23,7 +23,6 @@ syntax keyword shaderlabKeyword
       \ CustomEditor
       \ Fog
       \ BindChannels
-      \ AlphaToMask
       \ ColorMask
       \ Offset
       \ ColorMaterial
@@ -43,6 +42,9 @@ syntax keyword shaderlabKeywordValueAlphaTest
       \ Always
       \ Never
       \ contained
+
+syntax keyword shaderlabKeywordAlphaToMask AlphaToMask nextgroup=shaderlabKeywordValueAlphaToMask skipwhite skipempty
+syntax keyword shaderlabKeywordValueAlphaToMask On Off contained
 
 syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordIndexBlend,shaderlabKeywordValueBlend skipwhite skipempty
 syntax match shaderlabKeywordIndexBlend '\<[0-7]\>' contained nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
@@ -95,6 +97,14 @@ syntax keyword shaderlabKeywordFogSub Color Density Range contained
 syntax keyword shaderlabKeywordFogMode Mode contained nextgroup=shaderlabKeywordValueFogMode skipwhite skipempty
 syntax keyword shaderlabKeywordValueFogMode Off Global Linear Exp Exp2 contained
 
+syntax keyword shaderlabKeywordStencil Stencil nextgroup=shaderlabKeywordStencilBlock skipwhite skipempty
+syntax region shaderlabKeywordStencilBlock start='{' skip='$' end='}' contained contains=shaderlabKeywordStencilSub,shaderlabKeywordStencilComp,shaderlabKeywordStencilOp
+syntax keyword shaderlabKeywordStencilSub Ref ReadMask WriteMask contained
+syntax keyword shaderlabKeywordStencilComp Comp CompFront CompBack contained nextgroup=shaderlabKeywordValueStencilComp skipwhite skipempty
+syntax keyword shaderlabKeywordValueStencilComp Greater GEqual Less LEqual Equal NotEqual Always Never contained
+syntax keyword shaderlabKeywordStencilOp Pass PassFront PassBack Fail FailFront FailBack ZFail ZFailFront ZFailBack contained nextgroup=shaderlabKeywordValueStencilOp skipwhite skipempty
+syntax keyword shaderlabKeywordValueStencilOp Keep Zero Replace IncrSat DecrSat Invert IncrWrap DecrWrap contained
+
 syntax keyword shaderlabKeywordLighting Lighting nextgroup=shaderlabKeywordValueLighting skipwhite skipempty
 syntax keyword shaderlabKeywordValueLighting On Off contained
 
@@ -111,7 +121,15 @@ syntax keyword shaderlabKeywordValueZTest Less Greater LEqual GEqual NotEqual Al
 syntax keyword shaderlabKeywordZWrite ZWrite nextgroup=shaderlabKeywordValueZWrite skipwhite skipempty
 syntax keyword shaderlabKeywordValueZWrite On Off contained
 
+" syntax keyword shaderlabKeywordProperties Properties nextgroup=shaderlabKeywordPropertyBlock skipwhite skipempty
+" syntax keyword shaderlabKeywordProperties Properties
 
+" syntax region shaderlabKeywordPropertyBlock start='{' skip='$' end='}' contained contains=shaderlabProperty
+" syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube contained
+
+" syntax region shaderlabBlock start='{' skip='$' end='}' contains=ALL
+" syntax region shaderlabKeywordPropertyBlock start='{' skip='$' end='}' contained contains=ALL
+" syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube contained containedin=shaderlabKeywordPropertyBlock
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
@@ -996,12 +1014,17 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
 
   HiLink shaderlabKeyword Keyword
   HiLink shaderlabKeywordAlphaTest shaderlabKeyword
+  HiLink shaderlabKeywordAlphaToMask shaderlabKeyword
   HiLink shaderlabKeywordBlend shaderlabKeyword
   HiLink shaderlabKeywordBlendOp shaderlabKeyword
   HiLink shaderlabKeywordCull shaderlabKeyword
   HiLink shaderlabKeywordFog shaderlabKeyword
   HiLink shaderlabKeywordFogSub shaderlabKeyword
   HiLink shaderlabKeywordFogMode shaderlabKeyword
+  HiLink shaderlabKeywordStencil shaderlabKeyword
+  HiLink shaderlabKeywordStencilSub shaderlabKeyword
+  HiLink shaderlabKeywordStencilComp shaderlabKeyword
+  HiLink shaderlabKeywordStencilOp shaderlabKeyword
   HiLink shaderlabKeywordLighting shaderlabKeyword
   HiLink shaderlabKeywordMaterial shaderlabKeyword
   HiLink shaderlabKeywordMaterialSub shaderlabKeyword
@@ -1094,12 +1117,15 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
 
   HiLink shaderlabKeywordValue Constant
   HiLink shaderlabKeywordValueAlphaTest shaderlabKeywordValue
+  HiLink shaderlabKeywordValueAlphaToMask shaderlabKeywordValue
   HiLink shaderlabKeywordIndexBlend shaderlabKeywordValue
   HiLink shaderlabKeywordValueBlend shaderlabKeywordValue
   HiLink shaderlabKeywordIndexBlendOp shaderlabKeywordValue
   HiLink shaderlabKeywordValueBlendOp shaderlabKeywordValue
   HiLink shaderlabKeywordValueCull shaderlabKeywordValue
   HiLink shaderlabKeywordValueFogMode shaderlabKeywordValue
+  HiLink shaderlabKeywordValueStencilComp shaderlabKeywordValue
+  HiLink shaderlabKeywordValueStencilOp shaderlabKeywordValue
   HiLink shaderlabKeywordValueLighting shaderlabKeywordValue
   HiLink shaderlabKeywordValueSeparateSpecular shaderlabKeywordValue
   HiLink shaderlabKeywordValueZTest shaderlabKeywordValue
