@@ -162,7 +162,19 @@ syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastop
 syntax match shaderlabAttribute '\[\s*\<maxvertexcount\>\s*(\s*\d\+\s*)\s*\]'
 syntax keyword shaderlabAttribute UNITY_BRANCH UNITY_FLATTEN UNITY_UNROLL UNITY_LOOP UNITY_FASTOPT
 
-syntax keyword shaderlabSemantics POSITION NORMAL TANGENT SV_POSITION COLOR SV_Target SV_Depth DEPTH FACE SV_IsFrontFace
+syntax keyword shaderlabSemantics
+      \ POSITION
+      \ NORMAL
+      \ TANGENT
+      \ SV_POSITION
+      \ COLOR
+      \ SV_Target
+      \ SV_Depth
+      \ DEPTH
+      \ FACE
+      \ SV_IsFrontFace
+      \ SV_TessFactor
+      \ SV_InsideTessFactor
 syntax match shaderlabSemantics '\<\%(TEXCOORD\|SV_Target\|COLOR\)\d\>'
 
 syntax keyword shaderlabFunction
@@ -923,8 +935,66 @@ if !exists('shaderlab_no_lighting')
         \ LightingBlinnPhong_Deferred
         \ LightingBlinnPhong_GI
         \ LightingBlinnPhong_PrePass
-        \ UnityTessellationFactors
         \ DirLightmapDiffuse
+  syntax keyword shaderlabLightingType
+        \ UnityTessellationFactors
+endif
+
+if !exists('shaderlab_no_unity_lighting_common')
+  syntax keyword shaderlabUnityLightingCommonVariable
+        \ _LightColor0
+        \ _SpecColor
+  syntax keyword shaderlabUnityLightingCommonType
+        \ UnityLight
+        \ UnityIndirect
+        \ UnityGI
+        \ UnityGIInput
+endif
+
+" From UnityGBuffer.cginc
+if !exists('shaderlab_no_unity_g_buffer')
+  syntax keyword shaderlabUnityGBufferFunction
+        \ UnityStandardDataToGbuffer
+        \ UnityStandardDataFromGbuffer
+        \ UnityStandardDataApplyWeightToGbuffer
+  syntax keyword shaderlabUnityGBufferType UnityStandardData
+endif
+
+" From UnityGlobalIllumination.cginc
+if !exists('shaderlab_no_unity_global_illumination')
+  syntax keyword shaderlabUnityGlobalIlluminationFunction
+        \ DecodeDirectionalSpecularLightmap
+        \ ResetUnityLight
+        \ SubtractMainLightWithRealtimeAttenuationFromLightmap
+        \ ResetUnityGI
+        \ UnityGI_Base
+        \ UnityGI_IndirectSpecular
+        \ UnityGlobalIllumination
+endif
+
+" UnityImageBasedLighting.cginc
+if !exists('shaderlab_no_unity_image_based_lighting')
+  syntax keyword shaderlabUnityImageBasedLightingFunction
+        \ ReverseBits32
+        \ RadicalInverse_VdC
+        \ Hammersley2d
+        \ Hash
+        \ InitRandom
+        \ GetLocalFrame
+        \ ImportanceSampleCosDir
+        \ ImportanceSampleGGXDir
+        \ ImportanceSampleLambert
+        \ ImportanceSampleGGX
+        \ IntegrateLambertDiffuseIBLRef
+        \ IntegrateDisneyDiffuseIBLRef
+        \ IntegrateSpecularGGXIBLRef
+        \ IntegrateDFG
+        \ IntegrateLD
+        \ UnityGlossyEnvironmentSetup
+        \ perceptualRoughnessToMipmapLevel
+        \ mipmapLevelToPerceptualRoughness
+        \ Unity_GlossyEnvironment
+  syntax keyword shaderlabUnityImageBasedLightingType Unity_GlossyEnvironmentData
 endif
 
 if !exists('shaderlab_no_crt')
@@ -1103,6 +1173,22 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   if !exists('shaderlab_no_lighting')
     HiLink shaderlabLightingVariable shaderlabVariable
     HiLink shaderlabLightingFunction shaderlabFunction
+    HiLink shaderlabLightingType shaderlabType
+  endif
+  if !exists('shaderlab_no_unity_lighting_common')
+    HiLink shaderlabUnityLightingCommonVariable shaderlabVariable
+    HiLink shaderlabUnityLightingCommonType shaderlabType
+  endif
+  if !exists('shaderlab_no_unity_g_buffer')
+    HiLink shaderlabUnityGBufferFunction shaderlabFunction
+    HiLink shaderlabUnityGBufferType shaderlabType
+  endif
+  if !exists('shaderlab_no_unity_global_illumination')
+    HiLink shaderlabUnityGlobalIlluminationFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_unity_image_based_lighting')
+    HiLink shaderlabUnityImageBasedLightingFunction shaderlabFunction
+    HiLink shaderlabUnityImageBasedLightingType shaderlabType
   endif
   if !exists('shaderlab_no_crt')
     HiLink shaderlabCRTType Type
