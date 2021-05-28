@@ -346,8 +346,6 @@ syntax keyword shaderlabMacro
       \ SHADER_API_D3D11_9X
       \ SHADER_API_PS4
       \ SHADER_API_XBOXONE
-      \ UNITY_BRANCH
-      \ UNITY_FLATTEN
       \ UNITY_NO_SCREENSPACE_SHADOWS
       \ UNITY_NO_LINEAR_COLORSPACE
       \ UNITY_NO_RGBM
