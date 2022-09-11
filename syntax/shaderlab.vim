@@ -133,6 +133,7 @@ syntax keyword shaderlabKeywordValueZWrite On Off contained
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
+syntax keyword shaderlabInterpolationModifier linear centroid nointerpolation noperspective sample
 
 syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
 syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
@@ -1105,6 +1106,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabProperty StorageClass
 
   HiLink shaderlabStorageClass StorageClass
+  HiLink shaderlabInterpolationModifier StorageClass
   HiLink shaderlabType Type
   HiLink shaderlabAttrType Type
   HiLink shaderlabAttribute PreProc
