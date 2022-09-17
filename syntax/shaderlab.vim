@@ -135,7 +135,7 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 syntax keyword shaderlabStorageClass static const inline uniform in out inout
 syntax keyword shaderlabInterpolationModifier linear centroid nointerpolation noperspective sample
 
-syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj
+syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj SamplerState SamplerComparisonState
 syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
 syntax match shaderlabType '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
 syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
@@ -160,7 +160,8 @@ syntax keyword shaderlabAttrType
       \ Toggle
 
 syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastopt\)\>\s*\]'
-syntax match shaderlabAttribute '\[\s*\<maxvertexcount\>\s*(\s*\d\+\s*)\s*\]'
+syntax match shaderlabAttribute '\[\s*\<\%(maxvertexcount\|\%(UNITY_\)\?outputcontrolpoints\)\>\s*(\s*\d\+\s*)\s*\]'
+syntax match shaderlabAttribute '\[\s*\<\%(\%(UNITY_\)\?\%(domain\|partitioning\|outputtopology\|patchconstantfunc\)\)\>\s*(\s*"[^"]*"\s*)\s*\]'
 syntax keyword shaderlabAttribute UNITY_BRANCH UNITY_FLATTEN UNITY_UNROLL UNITY_LOOP UNITY_FASTOPT
 
 syntax keyword shaderlabSemantics
@@ -557,18 +558,27 @@ syntax keyword shaderlabVariable
       \ unity_FogParams
       \ unity_LightmapST
       \ unity_DynamicLightmapST
+      \ unity_SpecCube0
       \ unity_SpecCube0_BoxMax
       \ unity_SpecCube0_BoxMin
       \ unity_SpecCube0_ProbePosition
       \ unity_SpecCube0_HDR
+      \ unity_SpecCube1
       \ unity_SpecCube1_BoxMax
       \ unity_SpecCube1_BoxMin
       \ unity_SpecCube1_ProbePosition
       \ unity_SpecCube1_HDR
+      \ unity_ProbeVolumeSH
       \ unity_ProbeVolumeParams
       \ unity_ProbeVolumeWorldToObject
       \ unity_ProbeVolumeSizeInv
       \ unity_ProbeVolumeMin
+      \ unity_Lightmap
+      \ unity_LightmapInd
+      \ unity_ShadowMask
+      \ unity_DynamicLightmap
+      \ unity_DynamicDirectionality
+      \ unity_DynamicNormal
       \ unity_MatrixMVP
       \ unity_MatrixMV
       \ unity_MatrixTMV
