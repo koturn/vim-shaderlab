@@ -169,11 +169,13 @@ syntax keyword shaderlabSemantics
       \ NORMAL
       \ TANGENT
       \ SV_POSITION
+      \ SV_Position
       \ COLOR
       \ SV_Target
       \ SV_Depth
       \ DEPTH
       \ FACE
+      \ VPOS
       \ SV_IsFrontFace
       \ SV_TessFactor
       \ SV_InsideTessFactor
@@ -354,6 +356,7 @@ syntax keyword shaderlabMacro
       \ UNITY_NO_DXT5nm
       \ UNITY_FRAMEBUFFER_FETCH_AVAILABLE
       \ UNITY_USE_RGBA_FOR_POINT_SHADOWS
+      \ UNITY_POSITION
       \ UNITY_ATTEN_CHANNEL
       \ UNITY_HALF_TEXEL_OFFSET
       \ UNITY_UV_STARTS_AT_TOP
@@ -827,6 +830,59 @@ if !exists('shaderlab_no_unity_instancing')
         \ UNITY_WORLDTOOBJECTARRAY_CB
 endif
 
+if !exists('shaderlab_no_unity_standard_core')
+  syntax keyword shaderlabUnityStandardCoreFunction
+        \ NormalizePerVertexNormal
+        \ NormalizePerPixelNormal
+        \ MainLight
+        \ AdditiveLight
+        \ DummyLight
+        \ ZeroIndirect
+        \ WorldNormal
+        \ ExtractTangentToWorldPerPixel
+        \ PerPixelWorldNormal
+        \ SpecularSetup
+        \ RoughnessSetup
+        \ MetallicSetup
+        \ FragmentSetup
+        \ FragmentGI
+        \ OutputForward
+        \ VertexGIForward
+        \ vertForwardBase
+        \ fragForwardBaseInternal
+        \ fragForwardBase
+        \ vertForwardAdd
+        \ fragForwardAddInternal
+        \ fragForwardAdd
+        \ vertDeferred
+        \ fragDeferred
+        \ FragmentGI
+  syntax keyword shaderlabUnityStandardCoreType
+        \ FragmentCommonData
+        \ VertexOutputForwardBase
+        \ VertexOutputForwardAdd
+        \ VertexOutputDeferred
+  syntax keyword shaderlabUnityStandardCoreMacro
+        \ IN_VIEWDIR4PARALLAX
+        \ IN_VIEWDIR4PARALLAX_FWDADD
+        \ IN_WORLDPOS
+        \ IN_WORLDPOS_FWDADD
+        \ IN_LIGHTDIR_FWDADD
+        \ FRAGMENT_SETUP
+        \ FRAGMENT_SETUP_FWDADD
+  syntax keyword shaderlabUnityStandardCoreMacroFunction
+        \ UNITY_SETUP_BRDF_INPUT
+endif
+
+if !exists('shaderlab_no_unity_standard_meta')
+  syntax keyword shaderlabUnityStandardMetaType
+        \ v2f_meta
+  syntax keyword shaderlabUnityStandardMetaFunction
+        \ vert_meta
+        \ frag_meta
+        \ UnityLightmappingAlbedo
+endif
+
 if !exists('shaderlab_no_unity_standard_utils')
   syntax keyword shaderlabUnityStandardUtilsFunction
         \ SpecularStrength
@@ -960,6 +1016,96 @@ if !exists('shaderlab_no_unity_lighting_common')
         \ UnityGIInput
 endif
 
+if !exists('shaderlab_no_unity_meta_pass')
+  syntax keyword shaderlabUnityMacroConstant
+        \ dieletricMin
+        \ dieletricMax
+        \ gemsMin
+        \ gemsMax
+        \ conductorMin
+        \ conductorMax
+        \ albedoMin
+        \ albedoMax
+
+  syntax keyword shaderlabUnityMetaPassVariable
+        \ unity_MetaVertexControl
+        \ unity_MetaFragmentControl
+        \ unity_VisualizationMode
+        \ _CheckPureMetal
+        \ _CheckAlbedo
+        \ _AlbedoCompareColor
+        \ _AlbedoMinLuminance
+        \ _AlbedoMaxLuminance
+        \ _AlbedoHueTolerance
+        \ _AlbedoSaturationTolerance
+        \ unity_EditorViz_Texture
+        \ unity_EditorViz_Texture_ST
+        \ unity_EditorViz_UVIndex
+        \ unity_EditorViz_Decode_HDR
+        \ unity_EditorViz_ConvertToLinearSpace
+        \ unity_EditorViz_ColorMul
+        \ unity_EditorViz_ColorAdd
+        \ unity_EditorViz_Exposure
+        \ unity_EditorViz_LightTexture
+        \ unity_EditorViz_LightTextureB
+        \ unity_EditorViz_WorldToLight
+        \ unity_MaterialValidateLowColor
+        \ unity_MaterialValidateHighColor
+        \ unity_MaterialValidatePureMetalColor
+        \ unity_OneOverOutputBoost
+        \ unity_MaxOutputValue
+        \ unity_UseLinearSpace
+
+  syntax keyword shaderlabUnityMetaPassFunction
+        \ UnityMeta_RGBToHSVHelper
+        \ UnityMeta_RGBToHSV
+        \ UnityMeta_pbrAlbedo
+        \ UnityMeta_pbrMetalspec
+        \ UnityMetaVizUV
+        \ UnityMetaVertexPosition
+        \ UnityMetaFragment
+
+  syntax keyword shaderlabUnityMetaPassType
+        \ UnityMetaInput
+
+  syntax keyword shaderlabUnityMetaPassMacroConstant
+        \ EDITORVIZ_PBR_VALIDATION_ALBEDO
+        \ EDITORVIZ_PBR_VALIDATION_METALSPECULAR
+        \ EDITORVIZ_TEXTURE
+        \ EDITORVIZ_SHOWLIGHTMASK
+        \ PBR_VALIDATION_ALBEDO
+        \ PBR_VALIDATION_METALSPECULAR
+
+  syntax keyword shaderlabUnityMetaPassMacroVariable
+        \ unity_EditorViz_ChannelSelect
+        \ unity_EditorViz_Color
+        \ unity_EditorViz_LightType
+endif
+
+" From AutoLight.cginc
+if !exists('shaderlab_no_unity_pbs_lighting')
+  syntax keyword shaderlabUnityPBSLightingMacro
+        \ UNITY_GLOSSY_ENV_FROM_SURFACE
+        \ UNITY_GI
+
+  syntax keyword shaderlabUnityPBSLightingMacroFunction
+        \ UNITY_BRDF_PBS
+        \ UNITY_BRDF_GI
+
+  syntax keyword shaderlabUnityPBSLightingFunction
+        \ BRDF_Unity_Indirect
+        \ LightingStandard
+        \ LightingStandard_Deferred
+        \ LightingStandard_GI
+        \ LightingStandardSpecular
+        \ LightingStandardSpecular_Deferred
+        \ LightingStandardSpecular_GI
+
+  syntax keyword shaderlabUnityPBSLightingType
+        \ SurfaceOutputStandard
+        \ SurfaceOutputStandardSpecular
+endif
+
 " From UnityGBuffer.cginc
 if !exists('shaderlab_no_unity_g_buffer')
   syntax keyword shaderlabUnityGBufferFunction
@@ -1006,6 +1152,29 @@ if !exists('shaderlab_no_unity_image_based_lighting')
   syntax keyword shaderlabUnityImageBasedLightingType Unity_GlossyEnvironmentData
 endif
 
+if !exists('shaderlab_no_unity_standard_util')
+  syntax keyword shaderlabUnityStandardUtilFunction
+        \ SpecularStrength
+        \ EnergyConservationBetweenDiffuseAndSpecular
+        \ OneMinusReflectivityFromMetallic
+        \ DiffuseAndSpecularFromMetallic
+        \ PreMultiplyAlpha
+        \ ParallaxOffset1Step
+        \ LerpOneTo
+        \ LerpWhiteTo
+        \ UnpackScaleNormalDXT5nm
+        \ UnpackScaleNormalRGorAG
+        \ UnpackScaleNormal
+        \ BlendNormals
+        \ CreateTangentToWorldPerVertex
+        \ ShadeSHPerVertex
+        \ ShadeSHPerPixel
+        \ BoxProjectedCubemapDirection
+        \ CalculateSurfaceGradient
+        \ PerturbNormal
+        \ CalculateSurfaceNormal
+endif
+
 if !exists('shaderlab_no_crt')
   syntax keyword shaderlabCRTType
         \ appdata_customrendertexture
@@ -1041,6 +1210,14 @@ if !exists('shaderlab_no_crt')
         \ CustomRenderTextureComputeCubeDirection
         \ CustomRenderTextureVertexShader
         \ InitCustomRenderTextureVertexShader
+endif
+
+if !exists('shaderlab_no_vrchat')
+  syntax keyword shaderlabVRChatVariable
+        \ _AudioTexture
+        \ _VRChatMirrorMode
+        \ _VRChatCameraMode
+        \ _VRChatMirrorCameraPos
 endif
 
 
@@ -1168,8 +1345,18 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityInstancingVariable shaderlabVariable
     HiLink shaderlabUnityInstancingConstant shaderlabConstant
   endif
+  if !exists('shaderlab_no_unity_standard_core')
+    HiLink shaderlabUnityStandardCoreFunction shaderlabFunction
+    HiLink shaderlabUnityStandardCoreType shaderlabType
+    HiLink shaderlabUnityStandardCoreMacro shaderlabMacro
+    HiLink shaderlabUnityStandardCoreMacroFunction shaderlabMacroFunction
+  endif
+  if !exists('shaderlab_no_unity_standard_meta')
+    HiLink shaderlabUnityStandardMetaType shaderlabType
+    HiLink shaderlabUnityStandardMetaFunction shaderlabFunction
+  endif
   if !exists('shaderlab_no_unity_standard_utils')
-    syntax keyword shaderlabUnityStandardUtilsFunction shaderlabFunction
+    HiLink shaderlabUnityStandardUtilsFunction shaderlabFunction
   endif
   if !exists('shaderlab_no_unity_shadow_library')
     HiLink shaderlabUnityShadowLibraryMacroType shaderlabType
@@ -1191,6 +1378,20 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityLightingCommonVariable shaderlabVariable
     HiLink shaderlabUnityLightingCommonType shaderlabType
   endif
+  if !exists('shaderlab_no_unity_meta_pass')
+    HiLink shaderlabUnityMacroConstant shaderlabConstant
+    HiLink shaderlabUnityMetaPassVariable shaderlabVariable
+    HiLink shaderlabUnityMetaPassFunction shaderlabFunction
+    HiLink shaderlabUnityMetaPassType shaderlabType
+    HiLink shaderlabUnityMetaPassMacroConstant shaderlabUnityMacroConstant
+    HiLink shaderlabUnityMetaPassMacroVariable shaderlabMacroVariable
+  endif
+  if !exists('shaderlab_no_unity_pbs_lighting')
+    HiLink shaderlabUnityPBSLightingMacro shaderlabFunction
+    HiLink shaderlabUnityPBSLightingMacroFunction shaderlabUnityPBSLightingFunction
+    HiLink shaderlabUnityPBSLightingFunction shaderlabFunction
+    HiLink shaderlabUnityPBSLightingType shaderlabType
+  endif
   if !exists('shaderlab_no_unity_g_buffer')
     HiLink shaderlabUnityGBufferFunction shaderlabFunction
     HiLink shaderlabUnityGBufferType shaderlabType
@@ -1202,12 +1403,18 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityImageBasedLightingFunction shaderlabFunction
     HiLink shaderlabUnityImageBasedLightingType shaderlabType
   endif
+  if !exists('shaderlab_no_unity_standard_util')
+    HiLink shaderlabUnityStandardUtilFunction shaderlabFunction
+  endif
   if !exists('shaderlab_no_crt')
-    HiLink shaderlabCRTType Type
-    HiLink shaderlabCRTVariable Identifier
+    HiLink shaderlabCRTType shaderlabType
+    HiLink shaderlabCRTVariable shaderlabVariable
     HiLink shaderlabCRTMacroConstant shaderlabConstant
     HiLink shaderlabCRTMacroVariable shaderlabCRTVariable
-    HiLink shaderlabCRTFunction Function
+    HiLink shaderlabCRTFunction shaderlabFunction
+  endif
+  if !exists('shaderlab_no_vrchat')
+    HiLink shaderlabVRChatVariable shaderlabVariable
   endif
 
   HiLink shaderlabMacro Macro
