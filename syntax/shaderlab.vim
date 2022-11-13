@@ -170,6 +170,7 @@ syntax keyword shaderlabSemantics
       \ TANGENT
       \ SV_POSITION
       \ SV_Position
+      \ SV_VertexID
       \ COLOR
       \ SV_Target
       \ SV_Depth
