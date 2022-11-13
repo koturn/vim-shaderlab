@@ -1255,7 +1255,9 @@ endif
 syntax match shaderlabCommentError display "\*/"
 syntax match shaderlabCommentStartError display "/\*"me=e-1 contained
 
-syntax region shaderlabPreProc start="^\s*\zs\%(%:\|#\)\s*\%(pragma\|include\|define\|undef\|if\%(n\?def\)\?\|el\%(if\|se\)\|endif\|line\|error\)\>" skip="\\$" end="$" keepend contains=ALLBUT,shaderlabConditional
+syntax region shaderlabPreProc
+      \ start="^\s*\zs\%(%:\|#\)\s*\%(pragma\|include\|define\|undef\|if\%(n\?def\)\?\|el\%(if\|se\)\|endif\|line\|error\)\>" skip="\\$" end="$"
+      \ keepend contains=ALLBUT,shaderlabConditional,shaderlabKeywordFogBlock,shaderlabKeywordStencilBlock,shaderlabKeywordMaterialBlock
 
 
 " Define the default highlighting.
