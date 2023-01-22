@@ -121,6 +121,9 @@ syntax keyword shaderlabKeywordValueZTest Less Greater LEqual GEqual NotEqual Al
 syntax keyword shaderlabKeywordZWrite ZWrite nextgroup=shaderlabKeywordValueZWrite skipwhite skipempty
 syntax keyword shaderlabKeywordValueZWrite On Off contained
 
+syntax keyword shaderlabKeywordZClip ZClip nextgroup=shaderlabKeywordValueZClip skipwhite skipempty
+syntax keyword shaderlabKeywordValueZClip True False contained
+
 " syntax keyword shaderlabKeywordProperties Properties nextgroup=shaderlabKeywordPropertyBlock skipwhite skipempty
 " syntax keyword shaderlabKeywordProperties Properties
 
@@ -1291,6 +1294,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabKeywordSeparateSpecular shaderlabKeyword
   HiLink shaderlabKeywordZTest shaderlabKeyword
   HiLink shaderlabKeywordZWrite shaderlabKeyword
+  HiLink shaderlabKeywordZClip shaderlabKeyword
   HiLink shaderlabKeywordProperties shaderlabKeyword
 
   HiLink shaderlabProperty StorageClass
@@ -1438,6 +1442,7 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabKeywordValueSeparateSpecular shaderlabKeywordValue
   HiLink shaderlabKeywordValueZTest shaderlabKeywordValue
   HiLink shaderlabKeywordValueZWrite shaderlabKeywordValue
+  HiLink shaderlabKeywordValueZClip shaderlabKeywordValue
 
   HiLink shaderlabComment Comment
   HiLink shaderlabCommentL shaderlabComment
