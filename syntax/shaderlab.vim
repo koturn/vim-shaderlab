@@ -49,6 +49,7 @@ syntax keyword shaderlabKeywordValueAlphaToMask On Off contained
 syntax keyword shaderlabKeywordBlend Blend nextgroup=shaderlabKeywordIndexBlend,shaderlabKeywordValueBlend skipwhite skipempty
 syntax match shaderlabKeywordIndexBlend '\<[0-7]\>' contained nextgroup=shaderlabKeywordValueBlend skipwhite skipempty
 syntax keyword shaderlabKeywordValueBlend
+      \ Off
       \ One
       \ Zero
       \ SrcColor
