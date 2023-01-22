@@ -1087,7 +1087,7 @@ if !exists('shaderlab_no_unity_meta_pass')
         \ unity_EditorViz_LightType
 endif
 
-" From AutoLight.cginc
+" From UnityPBSLighting.cginc
 if !exists('shaderlab_no_unity_pbs_lighting')
   syntax keyword shaderlabUnityPBSLightingMacro
         \ UNITY_GLOSSY_ENV_FROM_SURFACE
@@ -1109,6 +1109,41 @@ if !exists('shaderlab_no_unity_pbs_lighting')
   syntax keyword shaderlabUnityPBSLightingType
         \ SurfaceOutputStandard
         \ SurfaceOutputStandardSpecular
+endif
+
+" From UnityStandardBRDF.cginc
+if !exists('shaderlab_no_unity_standard_brdf')
+  syntax keyword shaderlabUnityStandardBRDFFunction
+        \ PerceptualRoughnessToRoughness
+        \ RoughnessToPerceptualRoughness
+        \ SmoothnessToRoughness
+        \ SmoothnessToPerceptualRoughness
+        \ Pow4
+        \ Pow5
+        \ FresnelTerm
+        \ FresnelLerp
+        \ FresnelLerpFast
+        \ DisneyDiffuse
+        \ SmithVisibilityTerm
+        \ SmithBeckmannVisibilityTerm
+        \ SmithJointGGXVisibilityTerm
+        \ GGXTerm
+        \ PerceptualRoughnessToSpecPower
+        \ NDFBlinnPhongNormalizedTerm
+        \ GetSpecPowToMip
+        \ Unity_SafeNormalize
+        \ BRDF1_Unity_PBS
+        \ BRDF2_Unity_PBS
+        \ BRDF3_Unity_PBS
+        \ BRDF3_Direct
+        \ BRDF3_Indirect
+  syntax keyword shaderlabUnityStandardBRDFConstant
+        \ k0
+        \ k1
+        \ fUserMaxSPow
+        \ g_fMaxT
+  syntax keyword shaderlabUnityStandardBRDFVariable
+        \ unity_NHxRoughness
 endif
 
 " From UnityGBuffer.cginc
@@ -1399,6 +1434,11 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityPBSLightingMacroFunction shaderlabUnityPBSLightingFunction
     HiLink shaderlabUnityPBSLightingFunction shaderlabFunction
     HiLink shaderlabUnityPBSLightingType shaderlabType
+  endif
+  if !exists('shaderlab_no_unity_standard_brdf')
+    HiLink shaderlabUnityStandardBRDFFunction shaderlabFunction
+    HiLink shaderlabUnityStandardBRDFConstant shaderlabConstant
+    HiLink shaderlabUnityStandardBRDFVariable shaderlabVariable
   endif
   if !exists('shaderlab_no_unity_g_buffer')
     HiLink shaderlabUnityGBufferFunction shaderlabFunction
