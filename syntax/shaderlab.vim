@@ -136,7 +136,7 @@ syntax keyword shaderlabKeywordValueZClip True False contained
 " syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube contained containedin=shaderlabKeywordPropertyBlock
 syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 
-syntax keyword shaderlabStorageClass static const inline uniform in out inout
+syntax keyword shaderlabStorageClass static const inline uniform precise in out inout
 syntax keyword shaderlabInterpolationModifier linear centroid nointerpolation noperspective sample
 
 syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj SamplerState SamplerComparisonState
