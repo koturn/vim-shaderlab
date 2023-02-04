@@ -879,6 +879,77 @@ if !exists('shaderlab_no_unity_standard_core')
         \ UNITY_SETUP_BRDF_INPUT
 endif
 
+if !exists('shaderlab_no_unity_standard_core_forward_simple')
+  syntax keyword shaderlabUnityStandardCoreForwardSimpleFunction
+        \ MetallicSetup_Reflectivity
+        \ SpecularSetup_Reflectivity
+        \ RoughnessSetup_Reflectivity
+        \ TransformToTangentSpace
+        \ TangentSpaceLightingInput
+        \ vertForwardBaseSimple
+        \ FragmentSetupSimple
+        \ MainLightSimple
+        \ PerVertexGrazingTerm
+        \ PerVertexFresnelTerm
+        \ LightDirForSpecular
+        \ BRDF3DirectSimple
+        \ fragForwardBaseSimpleInternal
+        \ fragForwardBaseSimple
+        \ vertForwardAddSimple
+        \ FragmentSetupSimpleAdd
+        \ LightSpaceNormal
+        \ fragForwardAddSimpleInternal
+        \ fragForwardAddSimple
+  syntax keyword shaderlabUnityStandardCoreForwardSimpleType
+        \ VertexOutputBaseSimple
+        \ VertexOutputForwardAddSimple
+  syntax keyword shaderlabUnityStandardCoreForwardSimpleMacroFunction
+        \ JOIN
+        \ JOIN2
+        \ UNIFORM_REFLECTIVITY
+        \ REFLECTVEC_FOR_SPECULAR
+endif
+
+if !exists('shaderlab_no_unity_standard_input')
+  syntax keyword shaderlabUnityStandardInputFunction
+        \ TexCoords
+        \ DetailMask
+        \ Albedo
+        \ Alpha
+        \ Occlusion
+        \ SpecularGloss
+        \ MetallicGloss
+        \ MetallicRough
+        \ Emission
+        \ NormalInTangentSpace
+        \ Parallax
+  syntax keyword shaderlabUnityStandardInputType VertexInput
+  syntax keyword shaderlabUnityStandardInputVariable
+        \ _Color
+        \ _Cutoff
+        \ _MainTex
+        \ _MainTex_ST
+        \ _DetailAlbedoMap
+        \ _DetailAlbedoMap_ST
+        \ _BumpMap
+        \ _BumpScale
+        \ _DetailMask
+        \ _DetailNormalMap
+        \ _DetailNormalMapScale
+        \ _SpecGlossMap
+        \ _MetallicGlossMap
+        \ _Metallic
+        \ _Glossiness
+        \ _GlossMapScale
+        \ _OcclusionMap
+        \ _OcclusionStrength
+        \ _ParallaxMap
+        \ _Parallax
+        \ _UVSec
+        \ _EmissionColor
+        \ _EmissionMap
+endif
+
 if !exists('shaderlab_no_unity_standard_meta')
   syntax keyword shaderlabUnityStandardMetaType
         \ v2f_meta
@@ -1393,6 +1464,16 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
     HiLink shaderlabUnityStandardCoreType shaderlabType
     HiLink shaderlabUnityStandardCoreMacro shaderlabMacro
     HiLink shaderlabUnityStandardCoreMacroFunction shaderlabMacroFunction
+  endif
+  if !exists('shaderlab_no_unity_standard_core_forward_simple')
+    HiLink shaderlabUnityStandardCoreForwardSimpleFunction shaderlabFunction
+    HiLink shaderlabUnityStandardCoreForwardSimpleType shaderlabType
+    HiLink shaderlabUnityStandardCoreForwardSimpleMacroFunction shaderlabMacroFunction
+  endif
+  if !exists('shaderlab_no_unity_standard_input')
+    HiLink shaderlabUnityStandardInputFunction shaderlabFunction
+    HiLink shaderlabUnityStandardInputType shaderlabType
+    HiLink shaderlabUnityStandardInputVariable shaderlabVariable
   endif
   if !exists('shaderlab_no_unity_standard_meta')
     HiLink shaderlabUnityStandardMetaType shaderlabType
