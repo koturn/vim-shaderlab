@@ -162,6 +162,7 @@ syntax keyword shaderlabAttrType
       \ PowerSlider
       \ Space
       \ Toggle
+      \ ToggleOff
 
 syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastopt\)\>\s*\]'
 syntax match shaderlabAttribute '\[\s*\<\%(maxvertexcount\|\%(UNITY_\)\?outputcontrolpoints\)\>\s*(\s*\d\+\s*)\s*\]'
