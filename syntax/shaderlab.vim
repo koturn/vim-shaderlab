@@ -1335,7 +1335,9 @@ endif
 
 syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 
-syntax match shaderlabNumber display '\<\d\+\>'
+syntax match shaderlabDecimalNumber display '\<\%(0\|[1-9]\d\{0,9}\)\>'
+syntax match shaderlabOctalNumber display '\<0[0-3]\o\{1,10\}\>'
+syntax match shaderlabHexNumber display '\<0x\x\{1,8\}\>'
 
 syntax match shaderlabFloat display '\<\d\+\.\d*\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
 syntax match shaderlabFloat display '\<\.\d\+\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
@@ -1415,7 +1417,9 @@ if v:version >= 508 || !exists('did_shaderlab_syntax_inits')
   HiLink shaderlabSemantics Typedef
 
   HiLink shaderlabString String
-  HiLink shaderlabNumber Number
+  HiLink shaderlabDecimalNumber Number
+  HiLink shaderlabOctalNumber Number
+  HiLink shaderlabHexNumber Number
   HiLink shaderlabFloat Float
   HiLink shaderlabOperator Operator
   HiLink shaderlabSwizzleOperator Identifier
