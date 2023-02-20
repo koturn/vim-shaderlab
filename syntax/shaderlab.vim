@@ -140,10 +140,10 @@ syntax keyword shaderlabStorageClass static const inline uniform precise in out 
 syntax keyword shaderlabInterpolationModifier linear centroid nointerpolation noperspective sample
 
 syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream namespace struct class point line triangle lineadj triangleadj SamplerState SamplerComparisonState
-syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
-syntax match shaderlabType '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
-syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
-syntax match shaderlabType '\<Texture\%(2D\%(Array\|MS\)\?\|Cube\%(Array\)\?\|3D\)\%(_\%(half\|float\)\)\?\>'
+syntax match shaderlabType display '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
+syntax match shaderlabType display '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
+syntax match shaderlabType display '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
+syntax match shaderlabType display '\<Texture\%(2D\%(Array\|MS\)\?\|Cube\%(Array\)\?\|3D\)\%(_\%(half\|float\)\)\?\>'
 
 syntax keyword shaderlabAttrType
       \ Enum
@@ -185,7 +185,7 @@ syntax keyword shaderlabSemantics
       \ SV_IsFrontFace
       \ SV_TessFactor
       \ SV_InsideTessFactor
-syntax match shaderlabSemantics '\<\%(TEXCOORD\|SV_Target\|COLOR\)\d\>'
+syntax match shaderlabSemantics display '\<\%(TEXCOORD\|SV_Target\|COLOR\)\d\>'
 
 syntax keyword shaderlabFunction
       \ combine
@@ -1335,22 +1335,22 @@ endif
 
 syntax region shaderlabString start=/\v"/ skip=/\v\\./ end=/\v"/
 
-syntax match shaderlabNumber '\<\d\+\>'
+syntax match shaderlabNumber display '\<\d\+\>'
 
-syntax match shaderlabFloat '\<\d\+\.\d*\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
-syntax match shaderlabFloat '\<\.\d\+\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
-syntax match shaderlabFloat '\<\d\+e[-+]\?\d\+[FHfh]\?\>'
+syntax match shaderlabFloat display '\<\d\+\.\d*\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
+syntax match shaderlabFloat display '\<\.\d\+\%([Ee][-+]\?\d\+\)\?[FHfh]\?\>'
+syntax match shaderlabFloat display '\<\d\+e[-+]\?\d\+[FHfh]\?\>'
 
-syntax match shaderlabOperator "\v\="
-syntax match shaderlabOperator "\v\*"
-syntax match shaderlabOperator "\v/"
-syntax match shaderlabOperator "\v\+"
-syntax match shaderlabOperator "\v-"
-syntax match shaderlabOperator "\v\?"
-syntax match shaderlabOperator "\v\*\="
-syntax match shaderlabOperator "\v/\="
-syntax match shaderlabOperator "\v\+\="
-syntax match shaderlabOperator "\v-\="
+syntax match shaderlabOperator display "\v\="
+syntax match shaderlabOperator display "\v\*"
+syntax match shaderlabOperator display "\v/"
+syntax match shaderlabOperator display "\v\+"
+syntax match shaderlabOperator display "\v-"
+syntax match shaderlabOperator display "\v\?"
+syntax match shaderlabOperator display "\v\*\="
+syntax match shaderlabOperator display "\v/\="
+syntax match shaderlabOperator display "\v\+\="
+syntax match shaderlabOperator display "\v-\="
 
 syntax match shaderlabSwizzleOperator '\.\s*\<\%([xyzw]\{1,4\}\|[rgba]\{1,4\}\|[stpq]\{1,4\}\)\>'
 syntax match shaderlabMatrixSwizzleOperator '\.\s*\<\%(_\%(m[0-3][0-3]\|[1-4][1-4]\)\)\{1,4\}\>'
