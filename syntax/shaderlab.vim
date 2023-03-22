@@ -173,18 +173,23 @@ syntax keyword shaderlabSemantics
       \ POSITION
       \ NORMAL
       \ TANGENT
-      \ SV_POSITION
-      \ SV_Position
-      \ SV_VertexID
       \ COLOR
-      \ SV_Target
-      \ SV_Depth
       \ DEPTH
       \ FACE
       \ VPOS
+      \ SV_POSITION
+      \ SV_Position
+      \ SV_VertexID
+      \ SV_PrimitiveID
+      \ SV_InstanceID
+      \ SV_Target
+      \ SV_Depth
       \ SV_IsFrontFace
       \ SV_TessFactor
       \ SV_InsideTessFactor
+      \ SV_OutputControlPointID
+      \ SV_DomainLocation
+      \ SV_RenderTargetArrayIndex
 syntax match shaderlabSemantics display '\<\%(TEXCOORD\|SV_Target\|COLOR\)\d\>'
 
 syntax keyword shaderlabFunction
