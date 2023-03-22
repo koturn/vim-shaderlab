@@ -164,7 +164,8 @@ syntax keyword shaderlabAttrType
       \ Toggle
       \ ToggleOff
 
-syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|unroll\|loop\|fastopt\)\>\s*\]'
+syntax match shaderlabAttribute '\[\s*\<\%(branch\|flatten\|loop\|fastopt\)\>\s*\]'
+syntax match shaderlabAttribute '\[\s*\<unroll\>\%(\s*(\s*\d\+\s*)\)\?\s*\]'
 syntax match shaderlabAttribute '\[\s*\<\%(maxvertexcount\|\%(UNITY_\)\?outputcontrolpoints\)\>\s*(\s*\d\+\s*)\s*\]'
 syntax match shaderlabAttribute '\[\s*\<\%(\%(UNITY_\)\?\%(domain\|partitioning\|outputtopology\|patchconstantfunc\)\)\>\s*(\s*"[^"]*"\s*)\s*\]'
 syntax keyword shaderlabAttribute UNITY_BRANCH UNITY_FLATTEN UNITY_UNROLL UNITY_LOOP UNITY_FASTOPT
