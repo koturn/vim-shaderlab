@@ -139,7 +139,7 @@ syntax keyword shaderlabProperty Int Float Range Vector Color 2D 3D Cube
 syntax keyword shaderlabStorageClass static const inline uniform precise in out inout
 syntax keyword shaderlabInterpolationModifier linear centroid nointerpolation noperspective sample
 
-syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream struct point line triangle lineadj triangleadj SamplerState SamplerComparisonState
+syntax keyword shaderlabType void SurfaceOutput PointStream LineStream TriangleStream namespace struct class point line triangle lineadj triangleadj SamplerState SamplerComparisonState
 syntax match shaderlabType '\<\%(half\|\%(min1[06]\)\?float\|\%(min16\)\?u\?int\|bool\)\%([1-4]\%(x[1-4]\)\?\)\?\>'
 syntax match shaderlabType '\<\%(fixed\)\%(\([2-4]\)\%(x\1\)\?\)\?\>'
 syntax match shaderlabType '\<sampler\%(2D\|CUBE\|3D\)\%(_\%(half\|float\)\)\?\>'
