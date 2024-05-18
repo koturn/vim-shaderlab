@@ -457,7 +457,7 @@ syntax keyword shaderlabMacroFunction
       \ texRECTbias
       \ texRECTproj
 
-syntax keyword shaderlabStatement return discard break continue
+syntax keyword shaderlabStatement return discard break continue this
 syntax keyword shaderlabConditional if else switch
 syntax keyword shaderlabRepeat while for do
 syntax keyword shaderlabLabel case default
