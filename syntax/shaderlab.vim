@@ -90,7 +90,7 @@ syntax keyword shaderlabBlendValue3
       \ OneMinusSrcAlpha
       \ OneMinusDstColor
       \ OneMinusDstAlpha
-      \ contained nextgroup=shaderlabBlendValue4,shaderlabBlendValue4 skipwhite skipempty
+      \ contained nextgroup=shaderlabBlendValue4,shaderlabBlendVarRef4 skipwhite skipempty
 syntax match shaderlabBlendVarRef3 /\[\s*\w\+\s*\]/ contained nextgroup=shaderlabBlendValue4,shaderlabBlendValue4 skipwhite skipempty
 syntax keyword shaderlabBlendValue4
       \ Off
